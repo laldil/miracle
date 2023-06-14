@@ -133,7 +133,7 @@ message RentCarResponse {
 
 message GetCarInfoRequest {
   int32 car_id = 1;
-  int32 owner_id = 2;
+  int32 user_id = 2;
 }
 
 message GetCarInfoResponse {
@@ -145,5 +145,4 @@ message GetCarInfoResponse {
   int32 price = 6;
   bool is_used = 7;
   int32 owner_id = 8;
-  repeated User renter = 9;
 }

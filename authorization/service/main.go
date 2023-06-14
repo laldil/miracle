@@ -229,12 +229,20 @@ func (s *server) RentCar(ctx context.Context, req *pb.RentCarRequest) (*pb.RentC
 }
 
 func (s *server) GetCarInfo(ctx context.Context, req *pb.GetCarInfoRequest) (*pb.GetCarInfoResponse, error) {
-	query := "SELECT id, brand, description, color, year, price, is_used, owner_id FROM car WHERE id = $1 AND owner_id = $2"
-	row := s.db.QueryRowContext(ctx, query, req.CarId, req.OwnerId)
+	query := `
+		SELECT id, brand, description, color, year, price, is_used, owner_id
+		FROM car
+		WHERE id = $1 
+	`
+	row := s.db.QueryRowContext(ctx, query, req.CarId)
 
 	var car pb.Car
 	err := row.Scan(&car.Id, &car.Brand, &car.Description, &car.Color, &car.Year, &car.Price, &car.IsUsed, &car.OwnerId)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			log.Printf("Car not found with ID %d ", req.CarId)
+			return nil, fmt.Errorf("car not found")
+		}
 		log.Printf("Failed to fetch car information: %v", err)
 		return nil, fmt.Errorf("failed to get car information")
 	}

@@ -224,8 +224,7 @@ func rentCar(carClient pb.CarServiceClient, userID int32) error {
 
 	rentCarRequest.UserId = userID
 
-	// Get car information
-	carInfo, err := carClient.GetCarInfo(context.Background(), &pb.GetCarInfoRequest{CarId: rentCarRequest.CarId, OwnerId: userID})
+	carInfo, err := carClient.GetCarInfo(context.Background(), &pb.GetCarInfoRequest{CarId: rentCarRequest.CarId, UserId: rentCarRequest.UserId})
 	if err != nil {
 		return fmt.Errorf("failed to get car information: %v", err)
 	}
