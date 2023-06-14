@@ -1,9 +1,9 @@
 package main
 
 import (
-	"armageddon/internal/data"
-	"armageddon/internal/models"
-	"armageddon/internal/validator"
+	"car-service/internal/data"
+	"car-service/internal/model"
+	"car-service/internal/validator"
 	"errors"
 	"fmt"
 	"net/http"
@@ -16,6 +16,7 @@ func (app *application) createCarHandler(w http.ResponseWriter, r *http.Request)
 		Color       string `json:"color,omitempty"`
 		Year        int32  `json:"year,omitempty"`
 		Price       int32  `json:"price"`
+		UserID      int64  `json:"user_id"`
 	}
 
 	err := app.readJSON(w, r, &input)
@@ -24,19 +25,18 @@ func (app *application) createCarHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	user := app.contextGetUser(r)
-	car := &models.Car{
+	car := &model.Car{
 		Brand:       input.Brand,
 		Description: input.Description,
 		Color:       input.Color,
 		Year:        input.Year,
 		Price:       input.Price,
-		OwnerID:     user.ID,
+		OwnerID:     input.UserID,
 	}
 
 	v := validator.New()
 
-	if models.ValidateCar(v, car); !v.Valid() {
+	if model.ValidateCar(v, car); !v.Valid() {
 		app.failedValidationResponse(w, r, v.Errors)
 		return
 	}
@@ -66,7 +66,7 @@ func (app *application) showCarHandler(w http.ResponseWriter, r *http.Request) {
 	car, err := app.models.Car.Get(id)
 	if err != nil {
 		switch {
-		case errors.Is(err, models.ErrRecordNotFound):
+		case errors.Is(err, model.ErrRecordNotFound):
 			app.notFoundResponse(w, r)
 		default:
 			app.serverErrorResponse(w, r, err)
@@ -90,7 +90,7 @@ func (app *application) updateCarHandler(w http.ResponseWriter, r *http.Request)
 	car, err := app.models.Car.Get(id)
 	if err != nil {
 		switch {
-		case errors.Is(err, models.ErrRecordNotFound):
+		case errors.Is(err, model.ErrRecordNotFound):
 			app.notFoundResponse(w, r)
 		default:
 			app.serverErrorResponse(w, r, err)
@@ -138,7 +138,7 @@ func (app *application) updateCarHandler(w http.ResponseWriter, r *http.Request)
 	}
 
 	v := validator.New()
-	if models.ValidateCar(v, car); !v.Valid() {
+	if model.ValidateCar(v, car); !v.Valid() {
 		app.failedValidationResponse(w, r, v.Errors)
 		return
 	}
@@ -156,6 +156,17 @@ func (app *application) updateCarHandler(w http.ResponseWriter, r *http.Request)
 }
 
 func (app *application) deleteCarHandler(w http.ResponseWriter, r *http.Request) {
+	var input struct {
+		UserID   int64  `json:"user_id"`
+		UserRole string `json:"user_role"`
+	}
+
+	err := app.readJSON(w, r, &input)
+	if err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
 	id, err := app.readIDParam(r)
 	if err != nil {
 		app.notFoundResponse(w, r)
@@ -165,7 +176,7 @@ func (app *application) deleteCarHandler(w http.ResponseWriter, r *http.Request)
 	car, err := app.models.Car.Get(id)
 	if err != nil {
 		switch {
-		case errors.Is(err, models.ErrRecordNotFound):
+		case errors.Is(err, model.ErrRecordNotFound):
 			app.notFoundResponse(w, r)
 		default:
 			app.serverErrorResponse(w, r, err)
@@ -173,9 +184,8 @@ func (app *application) deleteCarHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	user := app.contextGetUser(r)
-	if user.Roles != "MODERATOR" {
-		if car.OwnerID != user.ID {
+	if input.UserRole != "MODERATOR" {
+		if car.OwnerID != input.UserID {
 			app.wrongCarResponse(w, r)
 		}
 		return
@@ -184,7 +194,7 @@ func (app *application) deleteCarHandler(w http.ResponseWriter, r *http.Request)
 	err = app.models.Car.Delete(id)
 	if err != nil {
 		switch {
-		case errors.Is(err, models.ErrRecordNotFound):
+		case errors.Is(err, model.ErrRecordNotFound):
 			app.notFoundResponse(w, r)
 		default:
 			app.serverErrorResponse(w, r, err)
@@ -236,6 +246,16 @@ func (app *application) listCarHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) rentCarHandler(w http.ResponseWriter, r *http.Request) {
+	var input struct {
+		UserID int64 `json:"user_id"`
+	}
+
+	err := app.readJSON(w, r, &input)
+	if err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
 	id, err := app.readIDParam(r)
 	if err != nil {
 		app.notFoundResponse(w, r)
@@ -245,7 +265,7 @@ func (app *application) rentCarHandler(w http.ResponseWriter, r *http.Request) {
 	car, err := app.models.Car.Get(id)
 	if err != nil {
 		switch {
-		case errors.Is(err, models.ErrRecordNotFound):
+		case errors.Is(err, model.ErrRecordNotFound):
 			app.notFoundResponse(w, r)
 		default:
 			app.serverErrorResponse(w, r, err)
@@ -258,8 +278,7 @@ func (app *application) rentCarHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user := app.contextGetUser(r)
-	err = app.models.Car.InsertToRent(car, user)
+	err = app.models.Car.InsertToRent(car, input.UserID)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 		return
@@ -279,6 +298,16 @@ func (app *application) rentCarHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) returnRentedCarHandler(w http.ResponseWriter, r *http.Request) {
+	var input struct {
+		UserID int64 `json:"user_id"`
+	}
+
+	err := app.readJSON(w, r, &input)
+	if err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
 	id, err := app.readIDParam(r)
 	if err != nil {
 		app.notFoundResponse(w, r)
@@ -288,7 +317,7 @@ func (app *application) returnRentedCarHandler(w http.ResponseWriter, r *http.Re
 	car, err := app.models.Car.Get(id)
 	if err != nil {
 		switch {
-		case errors.Is(err, models.ErrRecordNotFound):
+		case errors.Is(err, model.ErrRecordNotFound):
 			app.notFoundResponse(w, r)
 		default:
 			app.serverErrorResponse(w, r, err)
@@ -301,11 +330,10 @@ func (app *application) returnRentedCarHandler(w http.ResponseWriter, r *http.Re
 		return
 	}
 
-	user := app.contextGetUser(r)
-	err = app.models.Car.DeleteFromRent(car, user)
+	err = app.models.Car.DeleteFromRent(car, input.UserID)
 	if err != nil {
 		switch {
-		case errors.Is(err, models.ErrRecordNotFound):
+		case errors.Is(err, model.ErrRecordNotFound):
 			app.notFoundResponse(w, r)
 		default:
 			app.serverErrorResponse(w, r, err)

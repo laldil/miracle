@@ -1,10 +1,12 @@
 package main
 
 import (
+	"armageddon/cmd/api"
 	"armageddon/internal/data"
 	"armageddon/internal/jsonlog"
 	"armageddon/internal/models"
 	"bytes"
+	"car-service"
 	"encoding/json"
 	"flag"
 	"github.com/julienschmidt/httprouter"
@@ -15,23 +17,23 @@ import (
 	"testing"
 )
 
-func getConfig() *application {
-	var cfg config
+func getConfig() *api.application {
+	var cfg api.config
 	flag.StringVar(&cfg.db.dsn, "db-dsn", "postgres://postgres:7777@localhost/armageddon?sslmode=disable", "PostgreSQL DSN")
 	flag.IntVar(&cfg.db.maxOpenConns, "db-max-open-conns", 25, "PostgreSQL max open connections")
 	flag.IntVar(&cfg.db.maxIdleConns, "db-max-idle-conns", 25, "PostgreSQL max idle connections")
 	flag.StringVar(&cfg.db.maxIdleTime, "db-max-idle-time", "15m", "PostgreSQL max connection idle time")
 	flag.Parse()
 	logger := jsonlog.New(os.Stdout, jsonlog.LevelInfo)
-	db, err := openDB(cfg)
+	db, err := api.openDB(cfg)
 	if err != nil {
 		logger.PrintFatal(err, nil)
 	}
 
-	app := &application{
-		config: cfg,
-		logger: logger,
-		models: models.NewModels(db),
+	app := &api.application{
+		car_service.config: cfg,
+		logger:             logger,
+		models:             models.NewModels(db),
 	}
 	return app
 }
