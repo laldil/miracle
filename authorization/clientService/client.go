@@ -14,6 +14,8 @@ const (
 	serverAddress = "localhost:50051"
 )
 
+var sessionToken string
+
 func main() {
 	conn, err := grpc.Dial(serverAddress, grpc.WithInsecure())
 	if err != nil {
@@ -33,6 +35,25 @@ func main() {
 		registerUser(client)
 	} else {
 		loginUser(client)
+	}
+
+	var command string
+	commandPrompt := &survey.Input{
+		Message: "Enter a command ('getProfile' or 'otherCommand'):",
+	}
+	survey.AskOne(commandPrompt, &command)
+
+	if command == "getProfile" {
+		// Check if the user is logged in
+		if sessionToken != "" {
+			getUserProfile(client, getSessionToken())
+		} else {
+			fmt.Println("Please log in to use this command.")
+		}
+	} else if command == "otherCommand" {
+		// Handle other command
+	} else {
+		fmt.Println("Invalid command.")
 	}
 }
 
@@ -120,4 +141,28 @@ func loginUser(client pb.UserServiceClient) {
 	}
 
 	fmt.Printf("Login successful! User ID: %d\n", response.UserId)
+	fmt.Printf("Session Token: %s\n", response.SessionToken)
+
+	sessionToken = response.SessionToken
+}
+
+func getUserProfile(client pb.UserServiceClient, sessionToken string) {
+	request := &pb.UserProfileRequest{
+		SessionToken: sessionToken,
+	}
+
+	response, err := client.GetUserProfile(context.Background(), request)
+	if err != nil {
+		log.Fatalf("Failed to get user profile: %v", err)
+	}
+
+	fmt.Println("User Profile:")
+	fmt.Printf("User ID: %d\n", response.UserId)
+	fmt.Printf("Name: %s\n", response.Name)
+	fmt.Printf("Surname: %s\n", response.Surname)
+	fmt.Printf("Email: %s\n", response.Email)
+}
+
+func getSessionToken() string {
+	return sessionToken
 }
