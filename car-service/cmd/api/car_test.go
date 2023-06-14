@@ -1,12 +1,9 @@
 package main
 
 import (
-	"armageddon/cmd/api"
-	"armageddon/internal/data"
-	"armageddon/internal/jsonlog"
-	"armageddon/internal/models"
 	"bytes"
-	"car-service"
+	"car-service/internal/jsonlog"
+	"car-service/internal/model"
 	"encoding/json"
 	"flag"
 	"github.com/julienschmidt/httprouter"
@@ -17,23 +14,23 @@ import (
 	"testing"
 )
 
-func getConfig() *api.application {
-	var cfg api.config
+func getConfig() *application {
+	var cfg config
 	flag.StringVar(&cfg.db.dsn, "db-dsn", "postgres://postgres:7777@localhost/armageddon?sslmode=disable", "PostgreSQL DSN")
 	flag.IntVar(&cfg.db.maxOpenConns, "db-max-open-conns", 25, "PostgreSQL max open connections")
 	flag.IntVar(&cfg.db.maxIdleConns, "db-max-idle-conns", 25, "PostgreSQL max idle connections")
 	flag.StringVar(&cfg.db.maxIdleTime, "db-max-idle-time", "15m", "PostgreSQL max connection idle time")
 	flag.Parse()
 	logger := jsonlog.New(os.Stdout, jsonlog.LevelInfo)
-	db, err := api.openDB(cfg)
+	db, err := openDB(cfg)
 	if err != nil {
 		logger.PrintFatal(err, nil)
 	}
 
-	app := &api.application{
-		car_service.config: cfg,
-		logger:             logger,
-		models:             models.NewModels(db),
+	app := &application{
+		config: cfg,
+		logger: logger,
+		models: model.NewModels(db),
 	}
 	return app
 }
@@ -176,7 +173,7 @@ func TestCreateCarHandler(t *testing.T) {
 			}
 			rr := httptest.NewRecorder()
 
-			user, err := app.models.Users.GetForToken(data.ScopeAuthentication, testTable.token)
+			user, err := app.model.Users.GetForToken(data.ScopeAuthentication, testTable.token)
 			if err != nil {
 				t.Error(err)
 			}
