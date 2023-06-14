@@ -3,7 +3,7 @@ package helpers
 import (
 	"context"
 	"fmt"
-	pb "miracletest/proto"
+	pb "miracle/proto"
 	"regexp"
 )
 

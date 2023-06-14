@@ -3,18 +3,17 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+
 	"github.com/AlecAivazis/survey/v2"
 	"google.golang.org/grpc"
-	"log"
-	"miracletest/helpers"
-	pb "miracletest/proto"
+	"miracle/helpers"
+	pb "miracle/proto"
 )
 
 const (
 	serverAddress = "localhost:50051"
 )
-
-var sessionToken string
 
 func main() {
 	conn, err := grpc.Dial(serverAddress, grpc.WithInsecure())
@@ -29,35 +28,45 @@ func main() {
 	prompt := &survey.Confirm{
 		Message: "Do you want to register? (Otherwise, you will log in).",
 	}
-	survey.AskOne(prompt, &isRegister)
+	err = survey.AskOne(prompt, &isRegister)
+	if err != nil {
+		log.Fatalf("Failed to get user input: %v", err)
+	}
 
+	var userID int32
 	if isRegister {
-		registerUser(client)
+		userID, err = registerUser(client)
 	} else {
-		loginUser(client)
+		userID, err = loginUser(client)
+	}
+	if err != nil {
+		log.Fatalf("User authentication failed: %v", err)
 	}
 
-	var command string
-	commandPrompt := &survey.Input{
-		Message: "Enter a command ('getProfile' or 'otherCommand'):",
-	}
-	survey.AskOne(commandPrompt, &command)
-
-	if command == "getProfile" {
-		// Check if the user is logged in
-		if sessionToken != "" {
-			getUserProfile(client, getSessionToken())
-		} else {
-			fmt.Println("Please log in to use this command.")
+	for {
+		var command string
+		commandPrompt := &survey.Input{
+			Message: "Enter a command ('getProfile' or 'otherCommand'), or 'exit' to quit:",
 		}
-	} else if command == "otherCommand" {
-		// Handle other command
-	} else {
-		fmt.Println("Invalid command.")
+		err = survey.AskOne(commandPrompt, &command)
+		if err != nil {
+			log.Fatalf("Failed to get user input: %v", err)
+		}
+
+		if command == "exit" {
+			break
+		} else if command == "getProfile" {
+			err = getUserProfile(client, userID)
+			if err != nil {
+				log.Fatalf("Failed to get user profile: %v", err)
+			}
+		} else {
+			fmt.Println("Invalid command.")
+		}
 	}
 }
 
-func registerUser(client pb.UserServiceClient) {
+func registerUser(client pb.UserServiceClient) (int32, error) {
 	var registerRequest pb.RegisterRequest
 	err := survey.Ask([]*survey.Question{
 		{
@@ -83,37 +92,31 @@ func registerUser(client pb.UserServiceClient) {
 			Prompt: &survey.Password{
 				Message: "Enter your password:",
 			},
-			Validate: survey.ComposeValidators(
-				survey.Required,
-				helpers.ValidatePassword,
-			),
 		},
 	}, &registerRequest)
-
 	if err != nil {
-		log.Fatalf("Failed to get registration details: %v", err)
+		return 0, fmt.Errorf("failed to get registration details: %v", err)
 	}
 
 	emailTaken, err := helpers.IsEmailTaken(registerRequest.Email, client)
 	if err != nil {
-		log.Fatalf("Failed to check email availability: %v", err)
+		return 0, fmt.Errorf("failed to check email availability: %v", err)
 	}
-
 	if emailTaken {
-		fmt.Printf("This email '%s' is already taken\n", registerRequest.Email)
-		return
+		return 0, fmt.Errorf("this email '%s' is already taken", registerRequest.Email)
 	}
 
-	// отправление его данных на сервер
 	response, err := client.RegisterUser(context.Background(), &registerRequest)
 	if err != nil {
-		log.Fatalf("Registration failed: %v", err)
+		return 0, fmt.Errorf("registration failed: %v", err)
 	}
 
 	fmt.Printf("Registration successful! User ID: %d\n", response.UserId)
+
+	return response.UserId, nil
 }
 
-func loginUser(client pb.UserServiceClient) {
+func loginUser(client pb.UserServiceClient) (int32, error) {
 	var loginRequest pb.LoginRequest
 	err := survey.Ask([]*survey.Question{
 		{
@@ -129,31 +132,28 @@ func loginUser(client pb.UserServiceClient) {
 			},
 		},
 	}, &loginRequest)
-
 	if err != nil {
-		log.Fatalf("Failed to get login details: %v", err)
+		return 0, fmt.Errorf("failed to get login details: %v", err)
 	}
 
-	// request на сервер
 	response, err := client.LoginUser(context.Background(), &loginRequest)
 	if err != nil {
-		log.Fatalf("Login failed: %v", err)
+		return 0, fmt.Errorf("login failed: %v", err)
 	}
 
 	fmt.Printf("Login successful! User ID: %d\n", response.UserId)
-	fmt.Printf("Session Token: %s\n", response.SessionToken)
 
-	sessionToken = response.SessionToken
+	return response.UserId, nil
 }
 
-func getUserProfile(client pb.UserServiceClient, sessionToken string) {
+func getUserProfile(client pb.UserServiceClient, userID int32) error {
 	request := &pb.UserProfileRequest{
-		SessionToken: sessionToken,
+		UserId: userID,
 	}
 
 	response, err := client.GetUserProfile(context.Background(), request)
 	if err != nil {
-		log.Fatalf("Failed to get user profile: %v", err)
+		return fmt.Errorf("failed to get user profile: %v", err)
 	}
 
 	fmt.Println("User Profile:")
@@ -161,8 +161,6 @@ func getUserProfile(client pb.UserServiceClient, sessionToken string) {
 	fmt.Printf("Name: %s\n", response.Name)
 	fmt.Printf("Surname: %s\n", response.Surname)
 	fmt.Printf("Email: %s\n", response.Email)
-}
 
-func getSessionToken() string {
-	return sessionToken
+	return nil
 }

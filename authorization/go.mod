@@ -1,4 +1,4 @@
-module miracletest
+module miracle
 
 go 1.19
 
