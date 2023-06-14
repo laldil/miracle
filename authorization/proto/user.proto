@@ -13,41 +13,6 @@ message User {
   repeated Car owned_cars = 6;
   repeated Car rented_cars = 7;
 }
-
-
-message Car {
-  int32 id = 1;
-  string brand = 2;
-  string description = 3;
-  string color = 4;
-  int32 year = 5;
-  int32 price = 6;
-  bool is_used = 7;
-  int32 owner_id = 8;
-  repeated User renter = 9;
-}
-
-service CarService {
-  rpc GetCar(GetCarRequest) returns (GetCarResponse) {}
-  rpc ListCars(ListCarsRequest) returns (ListCarsResponse) {}
-}
-
-message GetCarRequest {
-  int32 car_id = 1;
-}
-
-message GetCarResponse {
-  Car car = 1;
-}
-
-message ListCarsRequest {
-  int32 owner_id = 1;
-}
-
-message ListCarsResponse {
-  repeated Car cars = 1;
-}
-
 service UserService {
   rpc RegisterUser(RegisterRequest) returns (RegisterResponse) {}
   rpc LoginUser(LoginRequest) returns (LoginResponse) {}
@@ -130,4 +95,39 @@ message RentCarRequest {
 
 message RentCarResponse {
   bool success = 1;
+  int32 car_id = 2;
+}
+
+
+message Car {
+  int32 id = 1;
+  string brand = 2;
+  string description = 3;
+  string color = 4;
+  int32 year = 5;
+  int32 price = 6;
+  bool is_used = 7;
+  int32 owner_id = 8;
+  repeated User renter = 9;
+}
+
+service CarService {
+  rpc GetCar(GetCarRequest) returns (GetCarResponse) {}
+  rpc ListCars(ListCarsRequest) returns (ListCarsResponse) {}
+}
+
+message GetCarRequest {
+  int32 car_id = 1;
+}
+
+message GetCarResponse {
+  Car car = 1;
+}
+
+message ListCarsRequest {
+  int32 owner_id = 1;
+}
+
+message ListCarsResponse {
+  repeated Car cars = 1;
 }
