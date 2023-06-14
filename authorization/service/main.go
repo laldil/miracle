@@ -150,6 +150,54 @@ func (s *server) GetUserProfile(ctx context.Context, req *pb.UserProfileRequest)
 	return response, nil
 }
 
+//func (s *server) CreateCar(ctx context.Context, req *pb.CreateCarRequest) (*pb.CreateCarResponse, error) {
+//	carID, err := generateUniqueID(s.db)
+//	if err != nil {
+//		log.Printf("Failed to generate unique ID: %v", err)
+//		return nil, fmt.Errorf("failed to create car")
+//	}
+//
+//	_, err = s.db.ExecContext(ctx, `
+//		INSERT INTO cars (id, name, owner_id, rented)
+//		VALUES ($1, $2, $3, $4)`,
+//		carID, req.Name, req.OwnerId, false)
+//	if err != nil {
+//		log.Printf("Failed to create car: %v", err)
+//		return nil, fmt.Errorf("failed to create car")
+//	}
+//
+//	response := &pb.CreateCarResponse{
+//		CarId: carID,
+//	}
+//
+//	return response, nil
+//}
+//
+//func (s *server) RentCar(ctx context.Context, req *pb.RentCarRequest) (*pb.RentCarResponse, error) {
+//	var ownerID int32
+//	err := s.db.QueryRowContext(ctx, "SELECT owner_id FROM cars WHERE id = $1", req.CarId).Scan(&ownerID)
+//	if err != nil {
+//		log.Printf("Failed to retrieve car data: %v", err)
+//		return nil, fmt.Errorf("failed to rent car")
+//	}
+//
+//	if ownerID == req.UserId {
+//		return nil, fmt.Errorf("cannot rent your own car")
+//	}
+//
+//	_, err = s.db.ExecContext(ctx, "UPDATE cars SET rented = true WHERE id = $1", req.CarId)
+//	if err != nil {
+//		log.Printf("Failed to rent car: %v", err)
+//		return nil, fmt.Errorf("failed to rent car")
+//	}
+//
+//	response := &pb.RentCarResponse{
+//		Message: "Car rented successfully",
+//	}
+//
+//	return response, nil
+//}
+
 func (s *server) ValidateEmail(ctx context.Context, req *pb.EmailValidationRequest) (*pb.EmailValidationResponse, error) {
 	query := "SELECT COUNT(*) FROM users WHERE email = $1"
 	var count int
