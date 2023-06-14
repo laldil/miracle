@@ -12,12 +12,26 @@ message User {
   string password_hash = 5;
   string owned_car = 6;
   string rented_car = 7;
+  string session_token = 8;
 }
 
 service UserService {
   rpc RegisterUser(RegisterRequest) returns (RegisterResponse) {}
   rpc LoginUser(LoginRequest) returns (LoginResponse) {}
   rpc ValidateEmail(EmailValidationRequest) returns (EmailValidationResponse) {}
+  rpc GetUserProfile(UserProfileRequest) returns (UserProfileResponse) {}
+
+}
+
+message UserProfileRequest {
+  string session_token = 1;
+}
+
+message UserProfileResponse {
+  int32 user_id = 1;
+  string name = 2;
+  string surname = 3;
+  string email = 4;
 }
 
 message RegisterRequest {

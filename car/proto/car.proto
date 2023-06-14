@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package users;
+
+option go_package = "/proto";
+
+message Car {
+  int32 id = 1;
+  string brand = 2;
+  string description = 3;
+  string color = 4;
+  int32 year = 5;
+  int32 price = 6;
+  bool is_used= 7;
+  int32 owner_id = 8;
+}
