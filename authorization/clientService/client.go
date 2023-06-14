@@ -25,7 +25,7 @@ func main() {
 
 	var isRegister bool
 	prompt := &survey.Confirm{
-		Message: "Do you want to register? (Otherwise, you will log in)",
+		Message: "Do you want to register? (Otherwise, you will log in).",
 	}
 	survey.AskOne(prompt, &isRegister)
 
