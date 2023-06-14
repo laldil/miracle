@@ -104,7 +104,7 @@ func loginUser(client pb.UserServiceClient) {
 		{
 			Name: "password",
 			Prompt: &survey.Password{
-				Message: "Enter your lovely password:",
+				Message: "Enter your password:",
 			},
 		},
 	}, &loginRequest)
