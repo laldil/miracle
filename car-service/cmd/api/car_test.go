@@ -1,10 +1,9 @@
 package main
 
 import (
-	"armageddon/internal/data"
-	"armageddon/internal/jsonlog"
-	"armageddon/internal/models"
 	"bytes"
+	"car-service/internal/jsonlog"
+	"car-service/internal/model"
 	"encoding/json"
 	"flag"
 	"github.com/julienschmidt/httprouter"
@@ -31,7 +30,7 @@ func getConfig() *application {
 	app := &application{
 		config: cfg,
 		logger: logger,
-		models: models.NewModels(db),
+		models: model.NewModels(db),
 	}
 	return app
 }
@@ -174,7 +173,7 @@ func TestCreateCarHandler(t *testing.T) {
 			}
 			rr := httptest.NewRecorder()
 
-			user, err := app.models.Users.GetForToken(data.ScopeAuthentication, testTable.token)
+			user, err := app.model.Users.GetForToken(data.ScopeAuthentication, testTable.token)
 			if err != nil {
 				t.Error(err)
 			}
