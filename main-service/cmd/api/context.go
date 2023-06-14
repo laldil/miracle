@@ -1,8 +1,8 @@
 package main
 
 import (
-	"armageddon/internal/models"
 	"context"
+	"main-service/internal/models"
 	"net/http"
 )
 

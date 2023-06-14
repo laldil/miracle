@@ -1,12 +1,12 @@
 package main
 
 import (
-	"armageddon/internal/validator"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"io"
+	"main-service/internal/validator"
 	"net/http"
 	"net/url"
 	"strconv"
