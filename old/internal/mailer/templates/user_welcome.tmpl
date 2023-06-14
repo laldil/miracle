@@ -1,0 +1,34 @@
+{{define "subject"}}Welcome to Armageddon Car Rental!{{end}}
+
+{{define "plainBody"}}
+Hello, {{.userName}}.
+Thanks for signing up for a Armageddon Car Rental account. We're excited to have you on board!
+To activate your account please send your token the following link:
+{"token": "{{.activationToken}}"}
+
+https://armageddon-go.onrender.com/tokens/authentication
+
+Please note that this is a one-time use token and it will expire in 3 days.
+Thanks,
+The Armageddon Team
+{{end}}
+
+{{define "htmlBody"}}
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <p>Hello, {{.userName}}.</p>
+    <p>Thanks for signing up for a Armageddon Car Rental account. We're excited to have you on board!</p>
+    <p>To activate your account please send your token the following link:
+        <code>https://armageddon-go.onrender.com/tokens/authentication?token={{.activationToken}}</code>
+    </p>
+    <p>Please note that this is a one-time use token and it will expire in 3 days.</p>
+    <p>Thanks,</p>
+    <p>The Armageddon Team</p>
+</body>
+</html>
+{{end}}
