@@ -22,6 +22,7 @@ const (
 type server struct {
 	db *sql.DB
 	pb.UnimplementedUserServiceServer
+	pb.UnimplementedCarServiceServer
 }
 
 func main() {
@@ -39,6 +40,7 @@ func main() {
 
 	s := grpc.NewServer()
 	pb.RegisterUserServiceServer(s, &server{db: db})
+	pb.RegisterCarServiceServer(s, &server{db: db})
 
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
@@ -64,7 +66,7 @@ func (s *server) RegisterUser(ctx context.Context, req *pb.RegisterRequest) (*pb
 		return nil, fmt.Errorf("email '%s' is already taken", req.Email)
 	}
 
-	userID, err := generateUniqueID(s.db)
+	userID, err := generateUniqueIDforUser(s.db)
 	if err != nil {
 		log.Printf("Failed to generate unique ID: %v", err)
 		return nil, fmt.Errorf("failed to register user")
@@ -150,7 +152,7 @@ func (s *server) GetUserProfile(ctx context.Context, req *pb.UserProfileRequest)
 	return response, nil
 }
 func (s *server) CreateCar(ctx context.Context, req *pb.CreateCarRequest) (*pb.CreateCarResponse, error) {
-	carID, err := generateUniqueID(s.db)
+	carID, err := generateUniqueIDforCar(s.db)
 	if err != nil {
 		log.Printf("Failed to generate unique ID: %v", err)
 		return nil, fmt.Errorf("failed to create car")
@@ -165,6 +167,16 @@ func (s *server) CreateCar(ctx context.Context, req *pb.CreateCarRequest) (*pb.C
 		return nil, fmt.Errorf("failed to create car")
 	}
 
+	_, err = s.db.ExecContext(ctx, `
+		UPDATE users
+		SET owned_car = $1
+		WHERE id = $2`,
+		carID, req.OwnerId)
+	if err != nil {
+		log.Printf("Failed to update owned_car: %v", err)
+		return nil, fmt.Errorf("failed to create car")
+	}
+
 	response := &pb.CreateCarResponse{
 		CarId: carID,
 	}
@@ -176,23 +188,66 @@ func (s *server) RentCar(ctx context.Context, req *pb.RentCarRequest) (*pb.RentC
 	var ownerID int32
 	err := s.db.QueryRowContext(ctx, "SELECT owner_id FROM car WHERE id = $1", req.CarId).Scan(&ownerID)
 	if err != nil {
-		log.Printf("Failed to retrieve car data: %v", err)
+		if err == sql.ErrNoRows {
+			log.Printf("Car not found for ID: %d", req.CarId)
+			return nil, fmt.Errorf("car not found")
+		}
+		log.Printf("Failed to retrieve car owner ID: %v", err)
 		return nil, fmt.Errorf("failed to rent car")
 	}
 
-	if ownerID == req.UserId {
-		return nil, fmt.Errorf("cannot rent your own car")
+	rentID, err := generateUniqueIDforRent(s.db)
+	if err != nil {
+		log.Printf("Failed to generate unique ID: %v", err)
+		return nil, fmt.Errorf("failed to rent car")
 	}
 
-	_, err = s.db.ExecContext(ctx, "UPDATE car SET is_used = true WHERE id = $1", req.CarId)
+	_, err = s.db.ExecContext(ctx, `
+		INSERT INTO rented_cars (id, user_id, car_id, price, taking_date, return_date)
+		VALUES ($1, $2, $3, $4, $5, $6)`,
+		rentID, req.UserId, req.CarId, req.Price, req.TakingDate, req.ReturnDate)
 	if err != nil {
 		log.Printf("Failed to rent car: %v", err)
 		return nil, fmt.Errorf("failed to rent car")
 	}
 
+	_, err = s.db.ExecContext(ctx, `
+		UPDATE users
+		SET rented_car = rented_car + 1
+		WHERE id = $1`,
+		req.UserId)
+	if err != nil {
+		log.Printf("Failed to update rented_cars count: %v", err)
+		return nil, fmt.Errorf("failed to rent car")
+	}
+
 	response := &pb.RentCarResponse{
-		Success: true,
-		CarId:   req.CarId,
+		CarId: req.CarId,
+	}
+
+	return response, nil
+}
+
+func (s *server) GetCarInfo(ctx context.Context, req *pb.GetCarInfoRequest) (*pb.GetCarInfoResponse, error) {
+	query := "SELECT id, brand, description, color, year, price, is_used, owner_id FROM car WHERE id = $1 AND owner_id = $2"
+	row := s.db.QueryRowContext(ctx, query, req.CarId, req.OwnerId)
+
+	var car pb.Car
+	err := row.Scan(&car.Id, &car.Brand, &car.Description, &car.Color, &car.Year, &car.Price, &car.IsUsed, &car.OwnerId)
+	if err != nil {
+		log.Printf("Failed to fetch car information: %v", err)
+		return nil, fmt.Errorf("failed to get car information")
+	}
+
+	response := &pb.GetCarInfoResponse{
+		CarId:       car.Id,
+		Brand:       car.Brand,
+		Description: car.Description,
+		Color:       car.Color,
+		Year:        car.Year,
+		Price:       car.Price,
+		IsUsed:      car.IsUsed,
+		OwnerId:     car.OwnerId,
 	}
 
 	return response, nil
@@ -213,9 +268,29 @@ func (s *server) ValidateEmail(ctx context.Context, req *pb.EmailValidationReque
 	return response, nil
 }
 
-func generateUniqueID(db *sql.DB) (int32, error) {
+func generateUniqueIDforUser(db *sql.DB) (int32, error) {
 	var id int32
 	err := db.QueryRow("SELECT COALESCE(MAX(id), 0) + 1 FROM users").Scan(&id)
+	if err != nil {
+		log.Printf("Failed to generate unique ID: %v", err)
+		return 0, err
+	}
+	return id, nil
+}
+
+func generateUniqueIDforCar(db *sql.DB) (int32, error) {
+	var id int32
+	err := db.QueryRow("SELECT COALESCE(MAX(id), 0) + 1 FROM car").Scan(&id)
+	if err != nil {
+		log.Printf("Failed to generate unique ID: %v", err)
+		return 0, err
+	}
+	return id, nil
+}
+
+func generateUniqueIDforRent(db *sql.DB) (int32, error) {
+	var id int32
+	err := db.QueryRow("SELECT COALESCE(MAX(id), 0) + 1 FROM rented_cars").Scan(&id)
 	if err != nil {
 		log.Printf("Failed to generate unique ID: %v", err)
 		return 0, err

@@ -23,6 +23,7 @@ func main() {
 	defer conn.Close()
 
 	client := pb.NewUserServiceClient(conn)
+	carclient := pb.NewCarServiceClient(conn)
 
 	var isRegister bool
 	prompt := &survey.Confirm{
@@ -61,12 +62,12 @@ func main() {
 				log.Fatalf("Failed to get user profile: %v", err)
 			}
 		} else if command == "createCar" {
-			err = createCar(client, userID)
+			err = createCar(carclient, userID)
 			if err != nil {
 				log.Fatalf("Failed to create car: %v", err)
 			}
 		} else if command == "rentCar" {
-			err = rentCar(client, userID)
+			err = rentCar(carclient, userID)
 			if err != nil {
 				log.Fatalf("Failed to rent car: %v", err)
 			}
@@ -175,7 +176,7 @@ func getUserProfile(client pb.UserServiceClient, userID int32) error {
 	return nil
 }
 
-func createCar(client pb.UserServiceClient, userID int32) error {
+func createCar(carclient pb.CarServiceClient, userID int32) error {
 	var createCarRequest pb.CreateCarRequest
 	err := survey.Ask([]*survey.Question{
 		{
@@ -197,7 +198,7 @@ func createCar(client pb.UserServiceClient, userID int32) error {
 
 	createCarRequest.OwnerId = userID
 
-	response, err := client.CreateCar(context.Background(), &createCarRequest)
+	response, err := carclient.CreateCar(context.Background(), &createCarRequest)
 	if err != nil {
 		return fmt.Errorf("failed to create car: %v", err)
 	}
@@ -207,7 +208,7 @@ func createCar(client pb.UserServiceClient, userID int32) error {
 	return nil
 }
 
-func rentCar(client pb.UserServiceClient, userID int32) error {
+func rentCar(carClient pb.CarServiceClient, userID int32) error {
 	var rentCarRequest pb.RentCarRequest
 	err := survey.Ask([]*survey.Question{
 		{
@@ -223,7 +224,17 @@ func rentCar(client pb.UserServiceClient, userID int32) error {
 
 	rentCarRequest.UserId = userID
 
-	response, err := client.RentCar(context.Background(), &rentCarRequest)
+	// Get car information
+	carInfo, err := carClient.GetCarInfo(context.Background(), &pb.GetCarInfoRequest{CarId: rentCarRequest.CarId, OwnerId: userID})
+	if err != nil {
+		return fmt.Errorf("failed to get car information: %v", err)
+	}
+
+	if carInfo.OwnerId == userID {
+		return fmt.Errorf("you cannot rent your own car")
+	}
+
+	response, err := carClient.RentCar(context.Background(), &rentCarRequest)
 	if err != nil {
 		return fmt.Errorf("failed to rent car: %v", err)
 	}
