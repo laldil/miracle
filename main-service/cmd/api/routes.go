@@ -23,7 +23,6 @@ func (app *application) routes() *httprouter.Router {
 	router.HandlerFunc(http.MethodPut, "/users/activated", app.activateUserHandler)
 	router.HandlerFunc(http.MethodGet, "/users/:id", app.showUserHandler)
 	router.HandlerFunc(http.MethodDelete, "/users/:id", app.deleteUserHandler)
-	router.HandlerFunc(http.MethodPatch, "/users/:id", app.setRoleHandler)
 
 	router.HandlerFunc(http.MethodPost, "/tokens/authentication", app.createAuthenticationTokenHandler)
 
