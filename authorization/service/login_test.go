@@ -11,82 +11,69 @@ import (
 )
 
 func TestServer_RegisterUser(t *testing.T) {
-	// Create a test database connection
 	db, err := sql.Open("postgres", "postgres://postgres:admin@localhost/armageddon?sslmode=disable")
 	if err != nil {
 		t.Fatalf("Failed to connect to the database: %v", err)
 	}
 	defer db.Close()
 
-	// Create a test server instance
 	server := &server{db: db}
 
-	// Perform the registration
 	req := &pb.RegisterRequest{
 		Email:    "testo@example.com",
 		Password: "testpassword",
-		Name:     "John",
-		Surname:  "Doe",
+		Name:     "Tester",
+		Surname:  "Testerov",
 	}
 	res, err := server.RegisterUser(context.Background(), req)
 
-	// Verify the response and error
 	assert.NoError(t, err)
 	assert.NotNil(t, res)
 	assert.NotEmpty(t, res.UserId)
 }
 
 func TestServer_LoginUser(t *testing.T) {
-	// Create a test database connection
 	db, err := sql.Open("postgres", "postgres://postgres:admin@localhost/armageddon?sslmode=disable")
 	if err != nil {
 		t.Fatalf("Failed to connect to the database: %v", err)
 	}
 	defer db.Close()
 
-	// Create a test server instance
 	server := &server{db: db}
 
-	// Perform the login
 	req := &pb.LoginRequest{
 		Email:    "testo@example.com",
 		Password: "testpassword",
 	}
 	res, err := server.LoginUser(context.Background(), req)
 
-	// Verify the response and error
 	assert.NoError(t, err)
 	assert.NotNil(t, res)
 	assert.NotEmpty(t, res.UserId)
 }
 
 func TestServer_GetUserProfile(t *testing.T) {
-	// Create a test database connection
 	db, err := sql.Open("postgres", "postgres://postgres:admin@localhost/armageddon?sslmode=disable")
 	if err != nil {
 		t.Fatalf("Failed to connect to the database: %v", err)
 	}
 	defer db.Close()
 
-	// Create a test server instance
 	server := &server{db: db}
 
-	// Insert a test user into the database
 	ctx := context.Background()
 	userID := int32(6)
 	_, err = db.ExecContext(ctx, `
 		INSERT INTO users (id, name, surname, email, password_hash, owned_car, rented_car)
-		VALUES ($1, 'John', 'Doe', 'testogup@example.com', 'passwordhash', 0, 0)`,
+		VALUES ($1, 'Tester', 'Testerov', 'testogup@example.com', 'passwordhash', 0, 0)`,
 		userID)
 	assert.NoError(t, err)
 
-	// Perform the user profile request
 	req := &pb.UserProfileRequest{
 		UserId: userID,
 	}
 	res, err := server.GetUserProfile(ctx, req)
 
-	// Verify the response and error
 	assert.NoError(t, err)
 	assert.NotNil(t, res)
 	assert.Equal(t, userID, res.UserId)
@@ -95,26 +82,22 @@ func TestServer_GetUserProfile(t *testing.T) {
 }
 
 func TestServer_CreateCar(t *testing.T) {
-	// Create a test database connection
 	db, err := sql.Open("postgres", "postgres://postgres:admin@localhost/armageddon?sslmode=disable")
 	if err != nil {
 		t.Fatalf("Failed to connect to the database: %v", err)
 	}
 	defer db.Close()
 
-	// Create a test server instance
 	server := &server{db: db}
 
-	// Insert a test user into the database
 	ctx := context.Background()
 	userID := int32(7)
 	_, err = db.ExecContext(ctx, `
 		INSERT INTO users (id, name, surname, email, password_hash, owned_car, rented_car)
-		VALUES ($1, 'John', 'Doe', 'testocc@example.com', 'passwordhash', 0, 0)`,
+		VALUES ($1, 'Tester', 'Testerov', 'testocc@example.com', 'passwordhash', 0, 0)`,
 		userID)
 	assert.NoError(t, err)
 
-	// Perform the car creation
 	req := &pb.CreateCarRequest{
 		Brand:       "Toyota",
 		OwnerId:     userID,
@@ -125,24 +108,20 @@ func TestServer_CreateCar(t *testing.T) {
 	}
 	res, err := server.CreateCar(ctx, req)
 
-	// Verify the response and error
 	assert.NoError(t, err)
 	assert.NotNil(t, res)
 	assert.NotEmpty(t, res.CarId)
 }
 
 func TestServer_RentCar(t *testing.T) {
-	// Create a test database connection
 	db, err := sql.Open("postgres", "postgres://postgres:admin@localhost/armageddon?sslmode=disable")
 	if err != nil {
 		t.Fatalf("Failed to connect to the database: %v", err)
 	}
 	defer db.Close()
 
-	// Create a test server instance
 	server := &server{db: db}
 
-	// Insert a test user into the database
 	ctx := context.Background()
 	userID := int32(8)
 	_, err = db.ExecContext(ctx, `
@@ -151,7 +130,6 @@ func TestServer_RentCar(t *testing.T) {
 		userID)
 	assert.NoError(t, err)
 
-	// Insert a test car into the database
 	carID := int32(5)
 	_, err = db.ExecContext(ctx, `
 		INSERT INTO car (id, brand, owner_id, description, color, year, price, is_used)
@@ -159,14 +137,12 @@ func TestServer_RentCar(t *testing.T) {
 		carID, userID)
 	assert.NoError(t, err)
 
-	// Perform the car rental
 	req := &pb.RentCarRequest{
 		CarId:  carID,
 		UserId: userID,
 	}
 	res, err := server.RentCar(ctx, req)
 
-	// Verify the response and error
 	assert.NoError(t, err)
 	assert.NotNil(t, res)
 }
