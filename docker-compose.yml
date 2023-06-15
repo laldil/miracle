@@ -4,14 +4,14 @@ services:
   car-service:
     build: ./car-service
     ports:
-      - 4001:4000
+      - 4000:4000
 
   user-service:
     build: ./user-service
     ports:
-      - 4002:4001
+      - 4001:4001
 
   main-service:
     build: ./main-service
     ports:
-      - 4000:4002
+      - 4002:4002
