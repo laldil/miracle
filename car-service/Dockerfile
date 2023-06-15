@@ -1,33 +1,13 @@
-#FROM golang:1.19
-#
-#WORKDIR /car-service
-#
-#COPY go.mod go.sum ./
-#RUN go mod download && go mod verify
-#
-#COPY go.sum .
-#
-#COPY . .
-#
-#RUN go build -v -o ./cmd/api ./...
-#
-#EXPOSE 4000
-#
-#CMD ["go", "run","./cmd/api"]
-
-FROM golang:1.19 AS builder
+FROM golang:1.19
 
 WORKDIR /car-service
 
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 
+COPY go.sum .
 
-FROM golang:1.19
-
-WORKDIR /app
-
-COPY --from=builder /car-service .
+COPY . .
 
 RUN go build -v -o ./cmd/api ./...
 
