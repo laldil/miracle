@@ -130,8 +130,8 @@ func (s *server) LoginUser(ctx context.Context, req *pb.LoginRequest) (*pb.Login
 
 func (s *server) GetUserProfile(ctx context.Context, req *pb.UserProfileRequest) (*pb.UserProfileResponse, error) {
 	query := "SELECT id, name, surname, email FROM users WHERE id = $1"
-
 	var user pb.UserProfileResponse
+
 	err := s.db.QueryRowContext(ctx, query, req.UserId).Scan(&user.UserId, &user.Name, &user.Surname, &user.Email)
 	if err != nil {
 		if err == sql.ErrNoRows {
@@ -142,16 +142,78 @@ func (s *server) GetUserProfile(ctx context.Context, req *pb.UserProfileRequest)
 		return nil, fmt.Errorf("failed to get user profile by ID")
 	}
 
-	response := &pb.UserProfileResponse{
-		UserId:  user.UserId,
-		Name:    user.Name,
-		Surname: user.Surname,
-		Email:   user.Email,
+	ownedCar, err := s.fetchOwnedCar(ctx, req.UserId)
+	if err != nil {
+		log.Printf("Failed to fetch owned car for user ID: %d", req.UserId)
+		return nil, fmt.Errorf("failed to fetch owned car")
+	}
+	user.OwnedCar = ownedCar
+
+	rentedCar, err := s.fetchRentedCar(ctx, req.UserId)
+	if err != nil {
+		log.Printf("Failed to fetch rented car for user ID: %d", req.UserId)
+		return nil, fmt.Errorf("failed to fetch rented car")
+	}
+	user.RentedCar = rentedCar
+
+	return &user, nil
+}
+
+func (s *server) fetchOwnedCar(ctx context.Context, userID int32) ([]*pb.Car, error) {
+	query := "SELECT id, brand, description FROM car WHERE owner_id = $1"
+	rows, err := s.db.QueryContext(ctx, query, userID)
+	if err != nil {
+		log.Printf("Failed to fetch owned car for user ID: %d", userID)
+		return nil, fmt.Errorf("failed to fetch owned car")
+	}
+	defer rows.Close()
+
+	var ownedCars []*pb.Car
+	for rows.Next() {
+		var car pb.Car
+		err := rows.Scan(&car.Id, &car.Brand, &car.Description)
+		if err != nil {
+			log.Printf("Failed to scan owned car data for user ID: %d", userID)
+			return nil, fmt.Errorf("failed to fetch owned car")
+		}
+		ownedCars = append(ownedCars, &car)
 	}
 
-	return response, nil
+	return ownedCars, nil
+}
+
+func (s *server) fetchRentedCar(ctx context.Context, userID int32) ([]*pb.Car, error) {
+	query := "SELECT c.id, c.brand, c.description FROM car c JOIN rented_cars r ON c.id = r.car_id WHERE r.user_id = $1"
+	rows, err := s.db.QueryContext(ctx, query, userID)
+	if err != nil {
+		log.Printf("Failed to fetch rented car for user ID: %d", userID)
+		return nil, fmt.Errorf("failed to fetch rented car")
+	}
+	defer rows.Close()
+
+	var rentedCars []*pb.Car
+	for rows.Next() {
+		var car pb.Car
+		err := rows.Scan(&car.Id, &car.Brand, &car.Description)
+		if err != nil {
+			log.Printf("Failed to scan rented car data for user ID: %d", userID)
+			return nil, fmt.Errorf("failed to fetch rented car")
+		}
+		rentedCars = append(rentedCars, &car)
+	}
+
+	return rentedCars, nil
 }
 func (s *server) CreateCar(ctx context.Context, req *pb.CreateCarRequest) (*pb.CreateCarResponse, error) {
+	ownedCar, err := s.checkUserOwnedCar(ctx, req.OwnerId)
+	if err != nil {
+		log.Printf("Failed to check user's owned car: %v", err)
+		return nil, fmt.Errorf("failed to create car")
+	}
+	if ownedCar {
+		return nil, fmt.Errorf("user already owns a car and cannot own multiple cars")
+	}
+
 	carID, err := generateUniqueIDforCar(s.db)
 	if err != nil {
 		log.Printf("Failed to generate unique ID: %v", err)
@@ -159,9 +221,9 @@ func (s *server) CreateCar(ctx context.Context, req *pb.CreateCarRequest) (*pb.C
 	}
 
 	_, err = s.db.ExecContext(ctx, `
-		INSERT INTO car (id, brand, owner_id, is_used, description)
-		VALUES ($1, $2, $3, $4, $5)`,
-		carID, req.Brand, req.OwnerId, false, req.Description) // Assuming req.Description contains the car description
+		INSERT INTO car (id, brand, owner_id, is_used, description, color, year, price)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+		carID, req.Brand, req.OwnerId, false, req.Description, req.Color, req.Year, req.Price)
 	if err != nil {
 		log.Printf("Failed to create car: %v", err)
 		return nil, fmt.Errorf("failed to create car")
@@ -184,9 +246,31 @@ func (s *server) CreateCar(ctx context.Context, req *pb.CreateCarRequest) (*pb.C
 	return response, nil
 }
 
+func (s *server) checkUserOwnedCar(ctx context.Context, userID int32) (bool, error) {
+	row := s.db.QueryRowContext(ctx, "SELECT owned_car FROM users WHERE id = $1", userID)
+	var ownedCar int
+	err := row.Scan(&ownedCar)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return false, nil
+		}
+		return false, err
+	}
+	return ownedCar != 0, nil
+}
+
 func (s *server) RentCar(ctx context.Context, req *pb.RentCarRequest) (*pb.RentCarResponse, error) {
+	rentedCar, err := s.checkUserRentedCar(ctx, req.UserId)
+	if err != nil {
+		log.Printf("Failed to check user's rented car: %v", err)
+		return nil, fmt.Errorf("failed to rent car")
+	}
+	if rentedCar {
+		return nil, fmt.Errorf("user is already renting a car and cannot rent multiple cars")
+	}
+
 	var ownerID int32
-	err := s.db.QueryRowContext(ctx, "SELECT owner_id FROM car WHERE id = $1", req.CarId).Scan(&ownerID)
+	err = s.db.QueryRowContext(ctx, "SELECT owner_id FROM car WHERE id = $1", req.CarId).Scan(&ownerID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			log.Printf("Car not found for ID: %d", req.CarId)
@@ -204,7 +288,7 @@ func (s *server) RentCar(ctx context.Context, req *pb.RentCarRequest) (*pb.RentC
 
 	_, err = s.db.ExecContext(ctx, `
 		INSERT INTO rented_cars (id, user_id, car_id, price, taking_date, return_date)
-		VALUES ($1, $2, $3, $4, $5, $6)`,
+			VALUES ($1, $2, $3, $4, $5, $6)`,
 		rentID, req.UserId, req.CarId, req.Price, req.TakingDate, req.ReturnDate)
 	if err != nil {
 		log.Printf("Failed to rent car: %v", err)
@@ -221,11 +305,80 @@ func (s *server) RentCar(ctx context.Context, req *pb.RentCarRequest) (*pb.RentC
 		return nil, fmt.Errorf("failed to rent car")
 	}
 
+	_, err = s.db.ExecContext(ctx, `
+		UPDATE car
+		SET is_used = true
+		WHERE id = $1`,
+		req.CarId)
+	if err != nil {
+		log.Printf("Failed to update is_used flag: %v", err)
+		return nil, fmt.Errorf("failed to rent car")
+	}
+
 	response := &pb.RentCarResponse{
 		CarId: req.CarId,
 	}
 
 	return response, nil
+}
+
+func (s *server) ReturnCar(ctx context.Context, req *pb.ReturnCarRequest) (*pb.ReturnCarResponse, error) {
+	rentedCar, err := s.checkUserRentedCar(ctx, req.UserId)
+	if err != nil {
+		log.Printf("Failed to check user's rented car: %v", err)
+		return nil, fmt.Errorf("failed to return car")
+	}
+	if !rentedCar {
+		return nil, fmt.Errorf("user is not currently renting a car")
+	}
+
+	_, err = s.db.ExecContext(ctx, `
+		DELETE FROM rented_cars
+		WHERE user_id = $1 AND car_id = $2`,
+		req.UserId, req.CarId)
+	if err != nil {
+		log.Printf("Failed to return car: %v", err)
+		return nil, fmt.Errorf("failed to return car")
+	}
+
+	_, err = s.db.ExecContext(ctx, `
+		UPDATE users
+		SET rented_car = rented_car - 1
+		WHERE id = $1`,
+		req.UserId)
+	if err != nil {
+		log.Printf("Failed to update rented_cars count: %v", err)
+		return nil, fmt.Errorf("failed to return car")
+	}
+
+	_, err = s.db.ExecContext(ctx, `
+		UPDATE car
+		SET is_used = false
+		WHERE id = $1`,
+		req.CarId)
+	if err != nil {
+		log.Printf("Failed to update is_used flag: %v", err)
+		return nil, fmt.Errorf("failed to return car")
+	}
+
+	response := &pb.ReturnCarResponse{
+		CarId: req.CarId,
+	}
+
+	return response, nil
+}
+
+func (s *server) checkUserRentedCar(ctx context.Context, userID int32) (bool, error) {
+	row := s.db.QueryRowContext(ctx, "SELECT rented_car FROM users WHERE id = $1", userID)
+	var rentedCar int
+	err := row.Scan(&rentedCar)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return false, nil
+		}
+		return false, err
+	}
+	return rentedCar > 0, nil
 }
 
 func (s *server) GetCarInfo(ctx context.Context, req *pb.GetCarInfoRequest) (*pb.GetCarInfoResponse, error) {
@@ -260,7 +413,71 @@ func (s *server) GetCarInfo(ctx context.Context, req *pb.GetCarInfoRequest) (*pb
 
 	return response, nil
 }
+func (s *server) DeleteCar(ctx context.Context, req *pb.DeleteCarRequest) (*pb.DeleteCarResponse, error) {
+	carInfoReq := &pb.GetCarInfoRequest{
+		CarId: req.CarId,
+	}
 
+	carInfo, err := s.GetCarInfo(ctx, carInfoReq)
+	if err != nil {
+		log.Printf("Failed to retrieve car info: %v", err)
+		return nil, fmt.Errorf("failed to delete car")
+	}
+
+	if carInfo.IsUsed {
+		return nil, fmt.Errorf("cannot delete a car that is currently rented")
+	}
+
+	_, err = s.db.ExecContext(ctx, `
+		DELETE FROM car
+		WHERE id = $1`,
+		req.CarId)
+	if err != nil {
+		log.Printf("Failed to delete car: %v", err)
+		return nil, fmt.Errorf("failed to delete car")
+	}
+
+	response := &pb.DeleteCarResponse{
+		CarId: req.CarId,
+	}
+
+	return response, nil
+}
+
+func (s *server) GetAvailableCars(ctx context.Context, req *pb.GetAvailableCarsRequest) (*pb.GetAvailableCarsResponse, error) {
+	query := `
+		SELECT id, brand, description, color, year, price, is_used, owner_id
+		FROM car
+		WHERE is_used = false
+	`
+	rows, err := s.db.QueryContext(ctx, query)
+	if err != nil {
+		log.Printf("Failed to retrieve available cars: %v", err)
+		return nil, fmt.Errorf("failed to get available cars")
+	}
+	defer rows.Close()
+
+	var carInfos []*pb.CarInfo
+	for rows.Next() {
+		var carInfo pb.CarInfo
+		err := rows.Scan(&carInfo.CarId, &carInfo.Brand, &carInfo.Description, &carInfo.Color, &carInfo.Year, &carInfo.Price, &carInfo.IsUsed, &carInfo.OwnerId)
+		if err != nil {
+			log.Printf("Failed to scan car information: %v", err)
+			continue
+		}
+		carInfos = append(carInfos, &carInfo)
+	}
+	if err := rows.Err(); err != nil {
+		log.Printf("Error occurred while iterating through available cars: %v", err)
+		return nil, fmt.Errorf("failed to get available cars")
+	}
+
+	response := &pb.GetAvailableCarsResponse{
+		AvailableCars: carInfos,
+	}
+
+	return response, nil
+}
 func (s *server) ValidateEmail(ctx context.Context, req *pb.EmailValidationRequest) (*pb.EmailValidationResponse, error) {
 	query := "SELECT COUNT(*) FROM users WHERE email = $1"
 	var count int

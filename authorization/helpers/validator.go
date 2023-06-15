@@ -12,7 +12,6 @@ const (
 )
 
 func IsEmailTaken(email string, client pb.UserServiceClient) (bool, error) {
-	// Validate email format
 	validEmail := validateEmailFormat(email)
 	if !validEmail {
 		return false, fmt.Errorf("invalid email format: %s", email)

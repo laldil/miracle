@@ -50,6 +50,9 @@ service CarService {
   rpc RentCar(RentCarRequest) returns (RentCarResponse) {}
   rpc UpdateOwnedCarID(UpdateOwnedCarIDRequest) returns (UpdateOwnedCarIDResponse) {}
   rpc GetCarInfo(GetCarInfoRequest) returns (GetCarInfoResponse) {}
+  rpc GetAvailableCars(GetAvailableCarsRequest) returns (GetAvailableCarsResponse) {}
+  rpc ReturnCar(ReturnCarRequest) returns (ReturnCarResponse) {}
+  rpc DeleteCar(DeleteCarRequest) returns (DeleteCarResponse) {}
 }
 
 message UserDTO {
@@ -145,4 +148,41 @@ message GetCarInfoResponse {
   int32 price = 6;
   bool is_used = 7;
   int32 owner_id = 8;
+}
+
+message GetAvailableCarsRequest {}
+
+message GetAvailableCarsResponse {
+  repeated CarInfo available_cars = 1;
+}
+
+message CarInfo {
+  int32 car_id = 1;
+  string brand = 2;
+  string description = 3;
+  string color = 4;
+  int32 year = 5;
+  int32 price = 6;
+  bool is_used = 7;
+  int32 owner_id = 8;
+}
+
+message ReturnCarRequest {
+  int32 user_id = 1;
+  int32 car_id = 2;
+  google.protobuf.Timestamp return_date = 3;
+}
+
+message ReturnCarResponse {
+  int32 car_id = 1;
+  int32 user_id = 2;
+}
+
+message DeleteCarRequest {
+  int32 car_id = 1;
+}
+
+message DeleteCarResponse {
+  bool success = 1;
+  int32 car_id = 2;
 }
