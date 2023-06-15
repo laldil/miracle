@@ -11,6 +11,4 @@ COPY . .
 
 RUN go build -v -o ./cmd/api ./...
 
-EXPOSE 4000
-
 CMD ["go", "run","./cmd/api"]
