@@ -39,8 +39,10 @@ func main() {
 	defer conn.Close()
 
 	s := grpc.NewServer()
-	pb.RegisterUserServiceServer(s, &server{db: db})
-	pb.RegisterCarServiceServer(s, &server{db: db})
+	userService := &server{db: db}
+	carService := &server{db: db}
+	pb.RegisterUserServiceServer(s, userService)
+	pb.RegisterCarServiceServer(s, carService)
 
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {

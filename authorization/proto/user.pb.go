@@ -337,6 +337,203 @@ func (x *UpdateOwnedCarIDResponse) GetCarId() int32 {
 	return 0
 }
 
+type ChatMessage struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	MessageId  int32                  `protobuf:"varint,1,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+	SenderId   int32                  `protobuf:"varint,2,opt,name=sender_id,json=senderId,proto3" json:"sender_id,omitempty"`
+	ReceiverId int32                  `protobuf:"varint,3,opt,name=receiver_id,json=receiverId,proto3" json:"receiver_id,omitempty"`
+	Content    string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	Timestamp  *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+}
+
+func (x *ChatMessage) Reset() {
+	*x = ChatMessage{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_user_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ChatMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChatMessage) ProtoMessage() {}
+
+func (x *ChatMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_user_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChatMessage.ProtoReflect.Descriptor instead.
+func (*ChatMessage) Descriptor() ([]byte, []int) {
+	return file_proto_user_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ChatMessage) GetMessageId() int32 {
+	if x != nil {
+		return x.MessageId
+	}
+	return 0
+}
+
+func (x *ChatMessage) GetSenderId() int32 {
+	if x != nil {
+		return x.SenderId
+	}
+	return 0
+}
+
+func (x *ChatMessage) GetReceiverId() int32 {
+	if x != nil {
+		return x.ReceiverId
+	}
+	return 0
+}
+
+func (x *ChatMessage) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *ChatMessage) GetTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Timestamp
+	}
+	return nil
+}
+
+type SendMessageRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SenderId   int32                  `protobuf:"varint,1,opt,name=sender_id,json=senderId,proto3" json:"sender_id,omitempty"`
+	ReceiverId int32                  `protobuf:"varint,2,opt,name=receiver_id,json=receiverId,proto3" json:"receiver_id,omitempty"`
+	Content    string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	Timestamp  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+}
+
+func (x *SendMessageRequest) Reset() {
+	*x = SendMessageRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_user_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SendMessageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendMessageRequest) ProtoMessage() {}
+
+func (x *SendMessageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_user_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendMessageRequest.ProtoReflect.Descriptor instead.
+func (*SendMessageRequest) Descriptor() ([]byte, []int) {
+	return file_proto_user_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SendMessageRequest) GetSenderId() int32 {
+	if x != nil {
+		return x.SenderId
+	}
+	return 0
+}
+
+func (x *SendMessageRequest) GetReceiverId() int32 {
+	if x != nil {
+		return x.ReceiverId
+	}
+	return 0
+}
+
+func (x *SendMessageRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *SendMessageRequest) GetTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Timestamp
+	}
+	return nil
+}
+
+type SendMessageResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	MessageId int32 `protobuf:"varint,1,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
+}
+
+func (x *SendMessageResponse) Reset() {
+	*x = SendMessageResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_user_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SendMessageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendMessageResponse) ProtoMessage() {}
+
+func (x *SendMessageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_user_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendMessageResponse.ProtoReflect.Descriptor instead.
+func (*SendMessageResponse) Descriptor() ([]byte, []int) {
+	return file_proto_user_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *SendMessageResponse) GetMessageId() int32 {
+	if x != nil {
+		return x.MessageId
+	}
+	return 0
+}
+
 type UserDTO struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -353,7 +550,7 @@ type UserDTO struct {
 func (x *UserDTO) Reset() {
 	*x = UserDTO{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[4]
+		mi := &file_proto_user_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -366,7 +563,7 @@ func (x *UserDTO) String() string {
 func (*UserDTO) ProtoMessage() {}
 
 func (x *UserDTO) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[4]
+	mi := &file_proto_user_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -379,7 +576,7 @@ func (x *UserDTO) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserDTO.ProtoReflect.Descriptor instead.
 func (*UserDTO) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{4}
+	return file_proto_user_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UserDTO) GetUserId() int32 {
@@ -435,7 +632,7 @@ type UserProfileRequest struct {
 func (x *UserProfileRequest) Reset() {
 	*x = UserProfileRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[5]
+		mi := &file_proto_user_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -448,7 +645,7 @@ func (x *UserProfileRequest) String() string {
 func (*UserProfileRequest) ProtoMessage() {}
 
 func (x *UserProfileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[5]
+	mi := &file_proto_user_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -461,7 +658,7 @@ func (x *UserProfileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserProfileRequest.ProtoReflect.Descriptor instead.
 func (*UserProfileRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{5}
+	return file_proto_user_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UserProfileRequest) GetUserId() int32 {
@@ -487,7 +684,7 @@ type UserProfileResponse struct {
 func (x *UserProfileResponse) Reset() {
 	*x = UserProfileResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[6]
+		mi := &file_proto_user_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -500,7 +697,7 @@ func (x *UserProfileResponse) String() string {
 func (*UserProfileResponse) ProtoMessage() {}
 
 func (x *UserProfileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[6]
+	mi := &file_proto_user_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -513,7 +710,7 @@ func (x *UserProfileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserProfileResponse.ProtoReflect.Descriptor instead.
 func (*UserProfileResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{6}
+	return file_proto_user_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UserProfileResponse) GetUserId() int32 {
@@ -573,7 +770,7 @@ type RegisterRequest struct {
 func (x *RegisterRequest) Reset() {
 	*x = RegisterRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[7]
+		mi := &file_proto_user_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -586,7 +783,7 @@ func (x *RegisterRequest) String() string {
 func (*RegisterRequest) ProtoMessage() {}
 
 func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[7]
+	mi := &file_proto_user_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -599,7 +796,7 @@ func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{7}
+	return file_proto_user_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RegisterRequest) GetId() int32 {
@@ -648,7 +845,7 @@ type RegisterResponse struct {
 func (x *RegisterResponse) Reset() {
 	*x = RegisterResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[8]
+		mi := &file_proto_user_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -661,7 +858,7 @@ func (x *RegisterResponse) String() string {
 func (*RegisterResponse) ProtoMessage() {}
 
 func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[8]
+	mi := &file_proto_user_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -674,7 +871,7 @@ func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterResponse.ProtoReflect.Descriptor instead.
 func (*RegisterResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{8}
+	return file_proto_user_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *RegisterResponse) GetUserId() int32 {
@@ -697,7 +894,7 @@ type LoginRequest struct {
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[9]
+		mi := &file_proto_user_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -710,7 +907,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[9]
+	mi := &file_proto_user_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -723,7 +920,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{9}
+	return file_proto_user_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *LoginRequest) GetId() int32 {
@@ -758,7 +955,7 @@ type LoginResponse struct {
 func (x *LoginResponse) Reset() {
 	*x = LoginResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[10]
+		mi := &file_proto_user_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -771,7 +968,7 @@ func (x *LoginResponse) String() string {
 func (*LoginResponse) ProtoMessage() {}
 
 func (x *LoginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[10]
+	mi := &file_proto_user_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -784,7 +981,7 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
 func (*LoginResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{10}
+	return file_proto_user_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *LoginResponse) GetUserId() int32 {
@@ -805,7 +1002,7 @@ type EmailValidationRequest struct {
 func (x *EmailValidationRequest) Reset() {
 	*x = EmailValidationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[11]
+		mi := &file_proto_user_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -818,7 +1015,7 @@ func (x *EmailValidationRequest) String() string {
 func (*EmailValidationRequest) ProtoMessage() {}
 
 func (x *EmailValidationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[11]
+	mi := &file_proto_user_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -831,7 +1028,7 @@ func (x *EmailValidationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmailValidationRequest.ProtoReflect.Descriptor instead.
 func (*EmailValidationRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{11}
+	return file_proto_user_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *EmailValidationRequest) GetEmail() string {
@@ -852,7 +1049,7 @@ type EmailValidationResponse struct {
 func (x *EmailValidationResponse) Reset() {
 	*x = EmailValidationResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[12]
+		mi := &file_proto_user_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -865,7 +1062,7 @@ func (x *EmailValidationResponse) String() string {
 func (*EmailValidationResponse) ProtoMessage() {}
 
 func (x *EmailValidationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[12]
+	mi := &file_proto_user_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -878,7 +1075,7 @@ func (x *EmailValidationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmailValidationResponse.ProtoReflect.Descriptor instead.
 func (*EmailValidationResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{12}
+	return file_proto_user_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *EmailValidationResponse) GetValid() bool {
@@ -905,7 +1102,7 @@ type CreateCarRequest struct {
 func (x *CreateCarRequest) Reset() {
 	*x = CreateCarRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[13]
+		mi := &file_proto_user_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -918,7 +1115,7 @@ func (x *CreateCarRequest) String() string {
 func (*CreateCarRequest) ProtoMessage() {}
 
 func (x *CreateCarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[13]
+	mi := &file_proto_user_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -931,7 +1128,7 @@ func (x *CreateCarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCarRequest.ProtoReflect.Descriptor instead.
 func (*CreateCarRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{13}
+	return file_proto_user_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CreateCarRequest) GetOwnerId() int32 {
@@ -994,7 +1191,7 @@ type CreateCarResponse struct {
 func (x *CreateCarResponse) Reset() {
 	*x = CreateCarResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[14]
+		mi := &file_proto_user_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1007,7 +1204,7 @@ func (x *CreateCarResponse) String() string {
 func (*CreateCarResponse) ProtoMessage() {}
 
 func (x *CreateCarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[14]
+	mi := &file_proto_user_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1020,7 +1217,7 @@ func (x *CreateCarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCarResponse.ProtoReflect.Descriptor instead.
 func (*CreateCarResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{14}
+	return file_proto_user_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CreateCarResponse) GetCarId() int32 {
@@ -1045,7 +1242,7 @@ type RentCarRequest struct {
 func (x *RentCarRequest) Reset() {
 	*x = RentCarRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[15]
+		mi := &file_proto_user_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1058,7 +1255,7 @@ func (x *RentCarRequest) String() string {
 func (*RentCarRequest) ProtoMessage() {}
 
 func (x *RentCarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[15]
+	mi := &file_proto_user_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1071,7 +1268,7 @@ func (x *RentCarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RentCarRequest.ProtoReflect.Descriptor instead.
 func (*RentCarRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{15}
+	return file_proto_user_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RentCarRequest) GetUserId() int32 {
@@ -1121,7 +1318,7 @@ type RentCarResponse struct {
 func (x *RentCarResponse) Reset() {
 	*x = RentCarResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[16]
+		mi := &file_proto_user_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1134,7 +1331,7 @@ func (x *RentCarResponse) String() string {
 func (*RentCarResponse) ProtoMessage() {}
 
 func (x *RentCarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[16]
+	mi := &file_proto_user_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1147,7 +1344,7 @@ func (x *RentCarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RentCarResponse.ProtoReflect.Descriptor instead.
 func (*RentCarResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{16}
+	return file_proto_user_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *RentCarResponse) GetCarId() int32 {
@@ -1176,7 +1373,7 @@ type GetCarInfoRequest struct {
 func (x *GetCarInfoRequest) Reset() {
 	*x = GetCarInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[17]
+		mi := &file_proto_user_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1189,7 +1386,7 @@ func (x *GetCarInfoRequest) String() string {
 func (*GetCarInfoRequest) ProtoMessage() {}
 
 func (x *GetCarInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[17]
+	mi := &file_proto_user_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1202,7 +1399,7 @@ func (x *GetCarInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCarInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetCarInfoRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{17}
+	return file_proto_user_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetCarInfoRequest) GetCarId() int32 {
@@ -1237,7 +1434,7 @@ type GetCarInfoResponse struct {
 func (x *GetCarInfoResponse) Reset() {
 	*x = GetCarInfoResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[18]
+		mi := &file_proto_user_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1250,7 +1447,7 @@ func (x *GetCarInfoResponse) String() string {
 func (*GetCarInfoResponse) ProtoMessage() {}
 
 func (x *GetCarInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[18]
+	mi := &file_proto_user_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1263,7 +1460,7 @@ func (x *GetCarInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCarInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetCarInfoResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{18}
+	return file_proto_user_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetCarInfoResponse) GetCarId() int32 {
@@ -1331,7 +1528,7 @@ type GetAvailableCarsRequest struct {
 func (x *GetAvailableCarsRequest) Reset() {
 	*x = GetAvailableCarsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[19]
+		mi := &file_proto_user_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1344,7 +1541,7 @@ func (x *GetAvailableCarsRequest) String() string {
 func (*GetAvailableCarsRequest) ProtoMessage() {}
 
 func (x *GetAvailableCarsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[19]
+	mi := &file_proto_user_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1357,7 +1554,7 @@ func (x *GetAvailableCarsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAvailableCarsRequest.ProtoReflect.Descriptor instead.
 func (*GetAvailableCarsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{19}
+	return file_proto_user_proto_rawDescGZIP(), []int{22}
 }
 
 type GetAvailableCarsResponse struct {
@@ -1371,7 +1568,7 @@ type GetAvailableCarsResponse struct {
 func (x *GetAvailableCarsResponse) Reset() {
 	*x = GetAvailableCarsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[20]
+		mi := &file_proto_user_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1384,7 +1581,7 @@ func (x *GetAvailableCarsResponse) String() string {
 func (*GetAvailableCarsResponse) ProtoMessage() {}
 
 func (x *GetAvailableCarsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[20]
+	mi := &file_proto_user_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1397,7 +1594,7 @@ func (x *GetAvailableCarsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAvailableCarsResponse.ProtoReflect.Descriptor instead.
 func (*GetAvailableCarsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{20}
+	return file_proto_user_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetAvailableCarsResponse) GetAvailableCars() []*CarInfo {
@@ -1425,7 +1622,7 @@ type CarInfo struct {
 func (x *CarInfo) Reset() {
 	*x = CarInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[21]
+		mi := &file_proto_user_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1438,7 +1635,7 @@ func (x *CarInfo) String() string {
 func (*CarInfo) ProtoMessage() {}
 
 func (x *CarInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[21]
+	mi := &file_proto_user_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1451,7 +1648,7 @@ func (x *CarInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CarInfo.ProtoReflect.Descriptor instead.
 func (*CarInfo) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{21}
+	return file_proto_user_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *CarInfo) GetCarId() int32 {
@@ -1523,7 +1720,7 @@ type ReturnCarRequest struct {
 func (x *ReturnCarRequest) Reset() {
 	*x = ReturnCarRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[22]
+		mi := &file_proto_user_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1536,7 +1733,7 @@ func (x *ReturnCarRequest) String() string {
 func (*ReturnCarRequest) ProtoMessage() {}
 
 func (x *ReturnCarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[22]
+	mi := &file_proto_user_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1549,7 +1746,7 @@ func (x *ReturnCarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReturnCarRequest.ProtoReflect.Descriptor instead.
 func (*ReturnCarRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{22}
+	return file_proto_user_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ReturnCarRequest) GetUserId() int32 {
@@ -1585,7 +1782,7 @@ type ReturnCarResponse struct {
 func (x *ReturnCarResponse) Reset() {
 	*x = ReturnCarResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[23]
+		mi := &file_proto_user_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1598,7 +1795,7 @@ func (x *ReturnCarResponse) String() string {
 func (*ReturnCarResponse) ProtoMessage() {}
 
 func (x *ReturnCarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[23]
+	mi := &file_proto_user_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1611,7 +1808,7 @@ func (x *ReturnCarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReturnCarResponse.ProtoReflect.Descriptor instead.
 func (*ReturnCarResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{23}
+	return file_proto_user_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ReturnCarResponse) GetCarId() int32 {
@@ -1639,7 +1836,7 @@ type DeleteCarRequest struct {
 func (x *DeleteCarRequest) Reset() {
 	*x = DeleteCarRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[24]
+		mi := &file_proto_user_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1652,7 +1849,7 @@ func (x *DeleteCarRequest) String() string {
 func (*DeleteCarRequest) ProtoMessage() {}
 
 func (x *DeleteCarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[24]
+	mi := &file_proto_user_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1665,7 +1862,7 @@ func (x *DeleteCarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCarRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCarRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{24}
+	return file_proto_user_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *DeleteCarRequest) GetCarId() int32 {
@@ -1687,7 +1884,7 @@ type DeleteCarResponse struct {
 func (x *DeleteCarResponse) Reset() {
 	*x = DeleteCarResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[25]
+		mi := &file_proto_user_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1700,7 +1897,7 @@ func (x *DeleteCarResponse) String() string {
 func (*DeleteCarResponse) ProtoMessage() {}
 
 func (x *DeleteCarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[25]
+	mi := &file_proto_user_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1713,7 +1910,7 @@ func (x *DeleteCarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCarResponse.ProtoReflect.Descriptor instead.
 func (*DeleteCarResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{25}
+	return file_proto_user_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *DeleteCarResponse) GetSuccess() bool {
@@ -1774,6 +1971,32 @@ var file_proto_user_proto_rawDesc = []byte{
 	0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x05, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x63, 0x61, 0x72,
 	0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x63, 0x61, 0x72, 0x49, 0x64,
+	0x22, 0xbe, 0x01, 0x0a, 0x0b, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x12, 0x1d, 0x0a, 0x0a, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x49, 0x64, 0x12,
+	0x1b, 0x0a, 0x09, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x08, 0x73, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b,
+	0x72, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x0a, 0x72, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x72, 0x49, 0x64, 0x12, 0x18, 0x0a,
+	0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x12, 0x38, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73,
+	0x74, 0x61, 0x6d, 0x70, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d,
+	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
+	0x70, 0x22, 0xa6, 0x01, 0x0a, 0x12, 0x53, 0x65, 0x6e, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x73, 0x65, 0x6e, 0x64,
+	0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x73, 0x65, 0x6e,
+	0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x72, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65,
+	0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x72, 0x65, 0x63, 0x65,
+	0x69, 0x76, 0x65, 0x72, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
+	0x12, 0x38, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52,
+	0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x22, 0x34, 0x0a, 0x13, 0x53, 0x65,
+	0x6e, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x49, 0x64,
 	0x22, 0xba, 0x01, 0x0a, 0x07, 0x55, 0x73, 0x65, 0x72, 0x44, 0x54, 0x4f, 0x12, 0x17, 0x0a, 0x07,
 	0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x75,
 	0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20,
@@ -1915,7 +2138,7 @@ var file_proto_user_proto_rawDesc = []byte{
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63,
 	0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65,
 	0x73, 0x73, 0x12, 0x15, 0x0a, 0x06, 0x63, 0x61, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x05, 0x52, 0x05, 0x63, 0x61, 0x72, 0x49, 0x64, 0x32, 0xa7, 0x02, 0x0a, 0x0b, 0x55, 0x73,
+	0x28, 0x05, 0x52, 0x05, 0x63, 0x61, 0x72, 0x49, 0x64, 0x32, 0xef, 0x02, 0x0a, 0x0b, 0x55, 0x73,
 	0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x41, 0x0a, 0x0c, 0x52, 0x65, 0x67,
 	0x69, 0x73, 0x74, 0x65, 0x72, 0x55, 0x73, 0x65, 0x72, 0x12, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x2e, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
@@ -1934,40 +2157,45 @@ var file_proto_user_proto_rawDesc = []byte{
 	0x74, 0x6f, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x73,
 	0x65, 0x72, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x00, 0x32, 0x81, 0x04, 0x0a, 0x0a, 0x43, 0x61, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x12, 0x40, 0x0a, 0x09, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x72, 0x12,
-	0x17, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61,
-	0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x22, 0x00, 0x12, 0x3a, 0x0a, 0x07, 0x52, 0x65, 0x6e, 0x74, 0x43, 0x61, 0x72, 0x12,
-	0x15, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x6e, 0x74, 0x43, 0x61, 0x72, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52,
-	0x65, 0x6e, 0x74, 0x43, 0x61, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
-	0x12, 0x55, 0x0a, 0x10, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x77, 0x6e, 0x65, 0x64, 0x43,
-	0x61, 0x72, 0x49, 0x44, 0x12, 0x1e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x70, 0x64,
-	0x61, 0x74, 0x65, 0x4f, 0x77, 0x6e, 0x65, 0x64, 0x43, 0x61, 0x72, 0x49, 0x44, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x70, 0x64,
-	0x61, 0x74, 0x65, 0x4f, 0x77, 0x6e, 0x65, 0x64, 0x43, 0x61, 0x72, 0x49, 0x44, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x43, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x43, 0x61,
-	0x72, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x47, 0x65,
-	0x74, 0x43, 0x61, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x61, 0x72, 0x49, 0x6e,
-	0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x55, 0x0a, 0x10,
-	0x47, 0x65, 0x74, 0x41, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x43, 0x61, 0x72, 0x73,
-	0x12, 0x1e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x76, 0x61, 0x69,
-	0x6c, 0x61, 0x62, 0x6c, 0x65, 0x43, 0x61, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x1f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x76, 0x61, 0x69,
-	0x6c, 0x61, 0x62, 0x6c, 0x65, 0x43, 0x61, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x09, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x43, 0x61, 0x72,
-	0x12, 0x17, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x43,
-	0x61, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2e, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x43, 0x61, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x09, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43,
-	0x61, 0x72, 0x12, 0x17, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
-	0x65, 0x43, 0x61, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x72, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x08, 0x5a, 0x06, 0x2f, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x22, 0x00, 0x12, 0x46, 0x0a, 0x0b, 0x53, 0x65, 0x6e, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x12, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x65, 0x6e, 0x64, 0x4d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x65, 0x6e, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x32, 0x81, 0x04, 0x0a, 0x0a,
+	0x43, 0x61, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x40, 0x0a, 0x09, 0x43, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x72, 0x12, 0x17, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43,
+	0x61, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3a, 0x0a, 0x07,
+	0x52, 0x65, 0x6e, 0x74, 0x43, 0x61, 0x72, 0x12, 0x15, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x52, 0x65, 0x6e, 0x74, 0x43, 0x61, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x6e, 0x74, 0x43, 0x61, 0x72, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x55, 0x0a, 0x10, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x4f, 0x77, 0x6e, 0x65, 0x64, 0x43, 0x61, 0x72, 0x49, 0x44, 0x12, 0x1e, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x77, 0x6e, 0x65, 0x64,
+	0x43, 0x61, 0x72, 0x49, 0x44, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x77, 0x6e, 0x65, 0x64,
+	0x43, 0x61, 0x72, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12,
+	0x43, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x43, 0x61, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x18, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x61, 0x72, 0x49, 0x6e, 0x66, 0x6f,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x47, 0x65, 0x74, 0x43, 0x61, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x00, 0x12, 0x55, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x41, 0x76, 0x61, 0x69, 0x6c,
+	0x61, 0x62, 0x6c, 0x65, 0x43, 0x61, 0x72, 0x73, 0x12, 0x1e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x2e, 0x47, 0x65, 0x74, 0x41, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x43, 0x61, 0x72,
+	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x2e, 0x47, 0x65, 0x74, 0x41, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x43, 0x61, 0x72,
+	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x09, 0x52,
+	0x65, 0x74, 0x75, 0x72, 0x6e, 0x43, 0x61, 0x72, 0x12, 0x17, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x2e, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x43, 0x61, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e,
+	0x43, 0x61, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x40, 0x0a,
+	0x09, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x72, 0x12, 0x17, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x72, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x43, 0x61, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42,
+	0x08, 0x5a, 0x06, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -1982,75 +2210,82 @@ func file_proto_user_proto_rawDescGZIP() []byte {
 	return file_proto_user_proto_rawDescData
 }
 
-var file_proto_user_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_proto_user_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_proto_user_proto_goTypes = []interface{}{
 	(*User)(nil),                     // 0: proto.User
 	(*Car)(nil),                      // 1: proto.Car
 	(*UpdateOwnedCarIDRequest)(nil),  // 2: proto.UpdateOwnedCarIDRequest
 	(*UpdateOwnedCarIDResponse)(nil), // 3: proto.UpdateOwnedCarIDResponse
-	(*UserDTO)(nil),                  // 4: proto.UserDTO
-	(*UserProfileRequest)(nil),       // 5: proto.UserProfileRequest
-	(*UserProfileResponse)(nil),      // 6: proto.UserProfileResponse
-	(*RegisterRequest)(nil),          // 7: proto.RegisterRequest
-	(*RegisterResponse)(nil),         // 8: proto.RegisterResponse
-	(*LoginRequest)(nil),             // 9: proto.LoginRequest
-	(*LoginResponse)(nil),            // 10: proto.LoginResponse
-	(*EmailValidationRequest)(nil),   // 11: proto.EmailValidationRequest
-	(*EmailValidationResponse)(nil),  // 12: proto.EmailValidationResponse
-	(*CreateCarRequest)(nil),         // 13: proto.CreateCarRequest
-	(*CreateCarResponse)(nil),        // 14: proto.CreateCarResponse
-	(*RentCarRequest)(nil),           // 15: proto.RentCarRequest
-	(*RentCarResponse)(nil),          // 16: proto.RentCarResponse
-	(*GetCarInfoRequest)(nil),        // 17: proto.GetCarInfoRequest
-	(*GetCarInfoResponse)(nil),       // 18: proto.GetCarInfoResponse
-	(*GetAvailableCarsRequest)(nil),  // 19: proto.GetAvailableCarsRequest
-	(*GetAvailableCarsResponse)(nil), // 20: proto.GetAvailableCarsResponse
-	(*CarInfo)(nil),                  // 21: proto.CarInfo
-	(*ReturnCarRequest)(nil),         // 22: proto.ReturnCarRequest
-	(*ReturnCarResponse)(nil),        // 23: proto.ReturnCarResponse
-	(*DeleteCarRequest)(nil),         // 24: proto.DeleteCarRequest
-	(*DeleteCarResponse)(nil),        // 25: proto.DeleteCarResponse
-	(*timestamppb.Timestamp)(nil),    // 26: google.protobuf.Timestamp
+	(*ChatMessage)(nil),              // 4: proto.ChatMessage
+	(*SendMessageRequest)(nil),       // 5: proto.SendMessageRequest
+	(*SendMessageResponse)(nil),      // 6: proto.SendMessageResponse
+	(*UserDTO)(nil),                  // 7: proto.UserDTO
+	(*UserProfileRequest)(nil),       // 8: proto.UserProfileRequest
+	(*UserProfileResponse)(nil),      // 9: proto.UserProfileResponse
+	(*RegisterRequest)(nil),          // 10: proto.RegisterRequest
+	(*RegisterResponse)(nil),         // 11: proto.RegisterResponse
+	(*LoginRequest)(nil),             // 12: proto.LoginRequest
+	(*LoginResponse)(nil),            // 13: proto.LoginResponse
+	(*EmailValidationRequest)(nil),   // 14: proto.EmailValidationRequest
+	(*EmailValidationResponse)(nil),  // 15: proto.EmailValidationResponse
+	(*CreateCarRequest)(nil),         // 16: proto.CreateCarRequest
+	(*CreateCarResponse)(nil),        // 17: proto.CreateCarResponse
+	(*RentCarRequest)(nil),           // 18: proto.RentCarRequest
+	(*RentCarResponse)(nil),          // 19: proto.RentCarResponse
+	(*GetCarInfoRequest)(nil),        // 20: proto.GetCarInfoRequest
+	(*GetCarInfoResponse)(nil),       // 21: proto.GetCarInfoResponse
+	(*GetAvailableCarsRequest)(nil),  // 22: proto.GetAvailableCarsRequest
+	(*GetAvailableCarsResponse)(nil), // 23: proto.GetAvailableCarsResponse
+	(*CarInfo)(nil),                  // 24: proto.CarInfo
+	(*ReturnCarRequest)(nil),         // 25: proto.ReturnCarRequest
+	(*ReturnCarResponse)(nil),        // 26: proto.ReturnCarResponse
+	(*DeleteCarRequest)(nil),         // 27: proto.DeleteCarRequest
+	(*DeleteCarResponse)(nil),        // 28: proto.DeleteCarResponse
+	(*timestamppb.Timestamp)(nil),    // 29: google.protobuf.Timestamp
 }
 var file_proto_user_proto_depIdxs = []int32{
 	1,  // 0: proto.User.owned_car:type_name -> proto.Car
 	1,  // 1: proto.User.rented_car:type_name -> proto.Car
 	0,  // 2: proto.Car.renter:type_name -> proto.User
-	1,  // 3: proto.UserDTO.owned_car:type_name -> proto.Car
-	1,  // 4: proto.UserDTO.rented_car:type_name -> proto.Car
-	1,  // 5: proto.UserProfileResponse.owned_car:type_name -> proto.Car
-	1,  // 6: proto.UserProfileResponse.rented_car:type_name -> proto.Car
-	26, // 7: proto.RentCarRequest.taking_date:type_name -> google.protobuf.Timestamp
-	26, // 8: proto.RentCarRequest.return_date:type_name -> google.protobuf.Timestamp
-	21, // 9: proto.GetAvailableCarsResponse.available_cars:type_name -> proto.CarInfo
-	26, // 10: proto.ReturnCarRequest.return_date:type_name -> google.protobuf.Timestamp
-	7,  // 11: proto.UserService.RegisterUser:input_type -> proto.RegisterRequest
-	9,  // 12: proto.UserService.LoginUser:input_type -> proto.LoginRequest
-	11, // 13: proto.UserService.ValidateEmail:input_type -> proto.EmailValidationRequest
-	5,  // 14: proto.UserService.GetUserProfile:input_type -> proto.UserProfileRequest
-	13, // 15: proto.CarService.CreateCar:input_type -> proto.CreateCarRequest
-	15, // 16: proto.CarService.RentCar:input_type -> proto.RentCarRequest
-	2,  // 17: proto.CarService.UpdateOwnedCarID:input_type -> proto.UpdateOwnedCarIDRequest
-	17, // 18: proto.CarService.GetCarInfo:input_type -> proto.GetCarInfoRequest
-	19, // 19: proto.CarService.GetAvailableCars:input_type -> proto.GetAvailableCarsRequest
-	22, // 20: proto.CarService.ReturnCar:input_type -> proto.ReturnCarRequest
-	24, // 21: proto.CarService.DeleteCar:input_type -> proto.DeleteCarRequest
-	8,  // 22: proto.UserService.RegisterUser:output_type -> proto.RegisterResponse
-	10, // 23: proto.UserService.LoginUser:output_type -> proto.LoginResponse
-	12, // 24: proto.UserService.ValidateEmail:output_type -> proto.EmailValidationResponse
-	6,  // 25: proto.UserService.GetUserProfile:output_type -> proto.UserProfileResponse
-	14, // 26: proto.CarService.CreateCar:output_type -> proto.CreateCarResponse
-	16, // 27: proto.CarService.RentCar:output_type -> proto.RentCarResponse
-	3,  // 28: proto.CarService.UpdateOwnedCarID:output_type -> proto.UpdateOwnedCarIDResponse
-	18, // 29: proto.CarService.GetCarInfo:output_type -> proto.GetCarInfoResponse
-	20, // 30: proto.CarService.GetAvailableCars:output_type -> proto.GetAvailableCarsResponse
-	23, // 31: proto.CarService.ReturnCar:output_type -> proto.ReturnCarResponse
-	25, // 32: proto.CarService.DeleteCar:output_type -> proto.DeleteCarResponse
-	22, // [22:33] is the sub-list for method output_type
-	11, // [11:22] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	29, // 3: proto.ChatMessage.timestamp:type_name -> google.protobuf.Timestamp
+	29, // 4: proto.SendMessageRequest.timestamp:type_name -> google.protobuf.Timestamp
+	1,  // 5: proto.UserDTO.owned_car:type_name -> proto.Car
+	1,  // 6: proto.UserDTO.rented_car:type_name -> proto.Car
+	1,  // 7: proto.UserProfileResponse.owned_car:type_name -> proto.Car
+	1,  // 8: proto.UserProfileResponse.rented_car:type_name -> proto.Car
+	29, // 9: proto.RentCarRequest.taking_date:type_name -> google.protobuf.Timestamp
+	29, // 10: proto.RentCarRequest.return_date:type_name -> google.protobuf.Timestamp
+	24, // 11: proto.GetAvailableCarsResponse.available_cars:type_name -> proto.CarInfo
+	29, // 12: proto.ReturnCarRequest.return_date:type_name -> google.protobuf.Timestamp
+	10, // 13: proto.UserService.RegisterUser:input_type -> proto.RegisterRequest
+	12, // 14: proto.UserService.LoginUser:input_type -> proto.LoginRequest
+	14, // 15: proto.UserService.ValidateEmail:input_type -> proto.EmailValidationRequest
+	8,  // 16: proto.UserService.GetUserProfile:input_type -> proto.UserProfileRequest
+	5,  // 17: proto.UserService.SendMessage:input_type -> proto.SendMessageRequest
+	16, // 18: proto.CarService.CreateCar:input_type -> proto.CreateCarRequest
+	18, // 19: proto.CarService.RentCar:input_type -> proto.RentCarRequest
+	2,  // 20: proto.CarService.UpdateOwnedCarID:input_type -> proto.UpdateOwnedCarIDRequest
+	20, // 21: proto.CarService.GetCarInfo:input_type -> proto.GetCarInfoRequest
+	22, // 22: proto.CarService.GetAvailableCars:input_type -> proto.GetAvailableCarsRequest
+	25, // 23: proto.CarService.ReturnCar:input_type -> proto.ReturnCarRequest
+	27, // 24: proto.CarService.DeleteCar:input_type -> proto.DeleteCarRequest
+	11, // 25: proto.UserService.RegisterUser:output_type -> proto.RegisterResponse
+	13, // 26: proto.UserService.LoginUser:output_type -> proto.LoginResponse
+	15, // 27: proto.UserService.ValidateEmail:output_type -> proto.EmailValidationResponse
+	9,  // 28: proto.UserService.GetUserProfile:output_type -> proto.UserProfileResponse
+	6,  // 29: proto.UserService.SendMessage:output_type -> proto.SendMessageResponse
+	17, // 30: proto.CarService.CreateCar:output_type -> proto.CreateCarResponse
+	19, // 31: proto.CarService.RentCar:output_type -> proto.RentCarResponse
+	3,  // 32: proto.CarService.UpdateOwnedCarID:output_type -> proto.UpdateOwnedCarIDResponse
+	21, // 33: proto.CarService.GetCarInfo:output_type -> proto.GetCarInfoResponse
+	23, // 34: proto.CarService.GetAvailableCars:output_type -> proto.GetAvailableCarsResponse
+	26, // 35: proto.CarService.ReturnCar:output_type -> proto.ReturnCarResponse
+	28, // 36: proto.CarService.DeleteCar:output_type -> proto.DeleteCarResponse
+	25, // [25:37] is the sub-list for method output_type
+	13, // [13:25] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_proto_user_proto_init() }
@@ -2108,7 +2343,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserDTO); i {
+			switch v := v.(*ChatMessage); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2120,7 +2355,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserProfileRequest); i {
+			switch v := v.(*SendMessageRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2132,7 +2367,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserProfileResponse); i {
+			switch v := v.(*SendMessageResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2144,7 +2379,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RegisterRequest); i {
+			switch v := v.(*UserDTO); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2156,7 +2391,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RegisterResponse); i {
+			switch v := v.(*UserProfileRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2168,7 +2403,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*LoginRequest); i {
+			switch v := v.(*UserProfileResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2180,7 +2415,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*LoginResponse); i {
+			switch v := v.(*RegisterRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2192,7 +2427,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EmailValidationRequest); i {
+			switch v := v.(*RegisterResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2204,7 +2439,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EmailValidationResponse); i {
+			switch v := v.(*LoginRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2216,7 +2451,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateCarRequest); i {
+			switch v := v.(*LoginResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2228,7 +2463,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateCarResponse); i {
+			switch v := v.(*EmailValidationRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2240,7 +2475,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RentCarRequest); i {
+			switch v := v.(*EmailValidationResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2252,7 +2487,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RentCarResponse); i {
+			switch v := v.(*CreateCarRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2264,7 +2499,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetCarInfoRequest); i {
+			switch v := v.(*CreateCarResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2276,7 +2511,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetCarInfoResponse); i {
+			switch v := v.(*RentCarRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2288,7 +2523,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAvailableCarsRequest); i {
+			switch v := v.(*RentCarResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2300,7 +2535,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAvailableCarsResponse); i {
+			switch v := v.(*GetCarInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2312,7 +2547,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CarInfo); i {
+			switch v := v.(*GetCarInfoResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2324,7 +2559,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReturnCarRequest); i {
+			switch v := v.(*GetAvailableCarsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2336,7 +2571,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReturnCarResponse); i {
+			switch v := v.(*GetAvailableCarsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2348,7 +2583,7 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteCarRequest); i {
+			switch v := v.(*CarInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2360,6 +2595,42 @@ func file_proto_user_proto_init() {
 			}
 		}
 		file_proto_user_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ReturnCarRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_user_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ReturnCarResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_user_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteCarRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_user_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteCarResponse); i {
 			case 0:
 				return &v.state
@@ -2378,7 +2649,7 @@ func file_proto_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_user_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   26,
+			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   2,
 		},
