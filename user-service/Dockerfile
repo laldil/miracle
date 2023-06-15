@@ -33,4 +33,4 @@ RUN go build -v -o ./cmd/api ./...
 
 EXPOSE 4001
 
-CMD ["./cmd/api"]
+CMD ["go", "run","./cmd/api"]
