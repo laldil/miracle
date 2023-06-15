@@ -1,8 +1,10 @@
 syntax = "proto3";
 
-package users;
+package proto;
 
 option go_package = "/proto";
+
+import "google/protobuf/timestamp.proto";
 
 message User {
   int32 id = 1;
@@ -10,8 +12,49 @@ message User {
   string surname = 3;
   string email = 4;
   string password_hash = 5;
-  string owned_car = 6;
-  string rented_car = 7;
+  repeated Car owned_car = 6;
+  repeated Car rented_car = 7;
+}
+
+message Car {
+  int32 id = 1;
+  string brand = 2;
+  string description = 3;
+  string color = 4;
+  int32 year = 5;
+  int32 price = 6;
+  bool is_used = 7;
+  int32 owner_id = 8;
+  repeated User renter = 9;
+}
+
+message UpdateOwnedCarIDRequest {
+  int32 user_id = 1;
+  int32 car_id = 2;
+}
+
+message UpdateOwnedCarIDResponse {
+  int32 user_id = 1;
+  int32 car_id = 2;
+}
+
+message ChatMessage {
+  int32 message_id = 1;
+  int32 sender_id = 2;
+  int32 receiver_id = 3;
+  string content = 4;
+  google.protobuf.Timestamp timestamp = 5;
+}
+
+message SendMessageRequest {
+  int32 sender_id = 1;
+  int32 receiver_id = 2;
+  string content = 3;
+  google.protobuf.Timestamp timestamp = 4;
+}
+
+message SendMessageResponse {
+  int32 message_id = 1;
 }
 
 service UserService {
@@ -19,18 +62,29 @@ service UserService {
   rpc LoginUser(LoginRequest) returns (LoginResponse) {}
   rpc ValidateEmail(EmailValidationRequest) returns (EmailValidationResponse) {}
   rpc GetUserProfile(UserProfileRequest) returns (UserProfileResponse) {}
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {}
+}
+
+service CarService {
+  rpc CreateCar(CreateCarRequest) returns (CreateCarResponse) {}
+  rpc RentCar(RentCarRequest) returns (RentCarResponse) {}
+  rpc UpdateOwnedCarID(UpdateOwnedCarIDRequest) returns (UpdateOwnedCarIDResponse) {}
+  rpc GetCarInfo(GetCarInfoRequest) returns (GetCarInfoResponse) {}
+  rpc GetAvailableCars(GetAvailableCarsRequest) returns (GetAvailableCarsResponse) {}
+  rpc ReturnCar(ReturnCarRequest) returns (ReturnCarResponse) {}
+  rpc DeleteCar(DeleteCarRequest) returns (DeleteCarResponse) {}
 }
 
 message UserDTO {
-  int32 userid = 1;
+  int32 user_id = 1;
   string name = 2;
   string surname = 3;
   string email = 4;
-  string owned_car = 5;
-  string rented_car = 6;
+  repeated Car owned_car = 5;
+  repeated Car rented_car = 6;
 }
 
-message UserProfileRequest{
+message UserProfileRequest {
   int32 user_id = 1;
 }
 
@@ -39,6 +93,8 @@ message UserProfileResponse {
   string name = 2;
   string surname = 3;
   string email = 4;
+  repeated Car owned_car = 5;
+  repeated Car rented_car = 6;
 }
 
 message RegisterRequest {
@@ -69,4 +125,84 @@ message EmailValidationRequest {
 
 message EmailValidationResponse {
   bool valid = 1;
+}
+
+message CreateCarRequest {
+  int32 owner_id = 1;
+  string brand = 2;
+  string description = 3;
+  string color = 4;
+  int32 year = 5;
+  int32 price = 6;
+  bool is_used = 7;
+}
+
+message CreateCarResponse {
+  int32 car_id = 1;
+}
+
+message RentCarRequest {
+  int32 user_id = 1;
+  int32 car_id = 2;
+  int32 price = 3;
+  google.protobuf.Timestamp taking_date = 4;
+  google.protobuf.Timestamp return_date = 5;
+}
+
+message RentCarResponse {
+  int32 car_id = 1;
+  int32 user_id = 2;
+}
+
+message GetCarInfoRequest {
+  int32 car_id = 1;
+  int32 user_id = 2;
+}
+
+message GetCarInfoResponse {
+  int32 car_id = 1;
+  string brand = 2;
+  string description = 3;
+  string color = 4;
+  int32 year = 5;
+  int32 price = 6;
+  bool is_used = 7;
+  int32 owner_id = 8;
+}
+
+message GetAvailableCarsRequest {}
+
+message GetAvailableCarsResponse {
+  repeated CarInfo available_cars = 1;
+}
+
+message CarInfo {
+  int32 car_id = 1;
+  string brand = 2;
+  string description = 3;
+  string color = 4;
+  int32 year = 5;
+  int32 price = 6;
+  bool is_used = 7;
+  int32 owner_id = 8;
+}
+
+message ReturnCarRequest {
+  int32 user_id = 1;
+  int32 car_id = 2;
+  google.protobuf.Timestamp return_date = 3;
+}
+
+message ReturnCarResponse {
+  int32 car_id = 1;
+  int32 user_id = 2;
+}
+
+message DeleteCarRequest {
+  int32 car_id = 1;
+}
+
+message DeleteCarResponse {
+  bool success = 1;
+  int32 car_id = 2;
 }

@@ -26,6 +26,7 @@ type UserServiceClient interface {
 	LoginUser(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	ValidateEmail(ctx context.Context, in *EmailValidationRequest, opts ...grpc.CallOption) (*EmailValidationResponse, error)
 	GetUserProfile(ctx context.Context, in *UserProfileRequest, opts ...grpc.CallOption) (*UserProfileResponse, error)
+	SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error)
 }
 
 type userServiceClient struct {
@@ -38,7 +39,7 @@ func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 
 func (c *userServiceClient) RegisterUser(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
 	out := new(RegisterResponse)
-	err := c.cc.Invoke(ctx, "/users.UserService/RegisterUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.UserService/RegisterUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +48,7 @@ func (c *userServiceClient) RegisterUser(ctx context.Context, in *RegisterReques
 
 func (c *userServiceClient) LoginUser(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, "/users.UserService/LoginUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.UserService/LoginUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +57,7 @@ func (c *userServiceClient) LoginUser(ctx context.Context, in *LoginRequest, opt
 
 func (c *userServiceClient) ValidateEmail(ctx context.Context, in *EmailValidationRequest, opts ...grpc.CallOption) (*EmailValidationResponse, error) {
 	out := new(EmailValidationResponse)
-	err := c.cc.Invoke(ctx, "/users.UserService/ValidateEmail", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.UserService/ValidateEmail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +66,16 @@ func (c *userServiceClient) ValidateEmail(ctx context.Context, in *EmailValidati
 
 func (c *userServiceClient) GetUserProfile(ctx context.Context, in *UserProfileRequest, opts ...grpc.CallOption) (*UserProfileResponse, error) {
 	out := new(UserProfileResponse)
-	err := c.cc.Invoke(ctx, "/users.UserService/GetUserProfile", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.UserService/GetUserProfile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error) {
+	out := new(SendMessageResponse)
+	err := c.cc.Invoke(ctx, "/proto.UserService/SendMessage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,6 +90,7 @@ type UserServiceServer interface {
 	LoginUser(context.Context, *LoginRequest) (*LoginResponse, error)
 	ValidateEmail(context.Context, *EmailValidationRequest) (*EmailValidationResponse, error)
 	GetUserProfile(context.Context, *UserProfileRequest) (*UserProfileResponse, error)
+	SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -98,6 +109,9 @@ func (UnimplementedUserServiceServer) ValidateEmail(context.Context, *EmailValid
 }
 func (UnimplementedUserServiceServer) GetUserProfile(context.Context, *UserProfileRequest) (*UserProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
+}
+func (UnimplementedUserServiceServer) SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -122,7 +136,7 @@ func _UserService_RegisterUser_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/users.UserService/RegisterUser",
+		FullMethod: "/proto.UserService/RegisterUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).RegisterUser(ctx, req.(*RegisterRequest))
@@ -140,7 +154,7 @@ func _UserService_LoginUser_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/users.UserService/LoginUser",
+		FullMethod: "/proto.UserService/LoginUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).LoginUser(ctx, req.(*LoginRequest))
@@ -158,7 +172,7 @@ func _UserService_ValidateEmail_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/users.UserService/ValidateEmail",
+		FullMethod: "/proto.UserService/ValidateEmail",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).ValidateEmail(ctx, req.(*EmailValidationRequest))
@@ -176,10 +190,28 @@ func _UserService_GetUserProfile_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/users.UserService/GetUserProfile",
+		FullMethod: "/proto.UserService/GetUserProfile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).GetUserProfile(ctx, req.(*UserProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).SendMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.UserService/SendMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).SendMessage(ctx, req.(*SendMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -188,7 +220,7 @@ func _UserService_GetUserProfile_Handler(srv interface{}, ctx context.Context, d
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var UserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "users.UserService",
+	ServiceName: "proto.UserService",
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -206,6 +238,312 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserProfile",
 			Handler:    _UserService_GetUserProfile_Handler,
+		},
+		{
+			MethodName: "SendMessage",
+			Handler:    _UserService_SendMessage_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/user.proto",
+}
+
+// CarServiceClient is the client API for CarService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CarServiceClient interface {
+	CreateCar(ctx context.Context, in *CreateCarRequest, opts ...grpc.CallOption) (*CreateCarResponse, error)
+	RentCar(ctx context.Context, in *RentCarRequest, opts ...grpc.CallOption) (*RentCarResponse, error)
+	UpdateOwnedCarID(ctx context.Context, in *UpdateOwnedCarIDRequest, opts ...grpc.CallOption) (*UpdateOwnedCarIDResponse, error)
+	GetCarInfo(ctx context.Context, in *GetCarInfoRequest, opts ...grpc.CallOption) (*GetCarInfoResponse, error)
+	GetAvailableCars(ctx context.Context, in *GetAvailableCarsRequest, opts ...grpc.CallOption) (*GetAvailableCarsResponse, error)
+	ReturnCar(ctx context.Context, in *ReturnCarRequest, opts ...grpc.CallOption) (*ReturnCarResponse, error)
+	DeleteCar(ctx context.Context, in *DeleteCarRequest, opts ...grpc.CallOption) (*DeleteCarResponse, error)
+}
+
+type carServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCarServiceClient(cc grpc.ClientConnInterface) CarServiceClient {
+	return &carServiceClient{cc}
+}
+
+func (c *carServiceClient) CreateCar(ctx context.Context, in *CreateCarRequest, opts ...grpc.CallOption) (*CreateCarResponse, error) {
+	out := new(CreateCarResponse)
+	err := c.cc.Invoke(ctx, "/proto.CarService/CreateCar", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *carServiceClient) RentCar(ctx context.Context, in *RentCarRequest, opts ...grpc.CallOption) (*RentCarResponse, error) {
+	out := new(RentCarResponse)
+	err := c.cc.Invoke(ctx, "/proto.CarService/RentCar", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *carServiceClient) UpdateOwnedCarID(ctx context.Context, in *UpdateOwnedCarIDRequest, opts ...grpc.CallOption) (*UpdateOwnedCarIDResponse, error) {
+	out := new(UpdateOwnedCarIDResponse)
+	err := c.cc.Invoke(ctx, "/proto.CarService/UpdateOwnedCarID", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *carServiceClient) GetCarInfo(ctx context.Context, in *GetCarInfoRequest, opts ...grpc.CallOption) (*GetCarInfoResponse, error) {
+	out := new(GetCarInfoResponse)
+	err := c.cc.Invoke(ctx, "/proto.CarService/GetCarInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *carServiceClient) GetAvailableCars(ctx context.Context, in *GetAvailableCarsRequest, opts ...grpc.CallOption) (*GetAvailableCarsResponse, error) {
+	out := new(GetAvailableCarsResponse)
+	err := c.cc.Invoke(ctx, "/proto.CarService/GetAvailableCars", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *carServiceClient) ReturnCar(ctx context.Context, in *ReturnCarRequest, opts ...grpc.CallOption) (*ReturnCarResponse, error) {
+	out := new(ReturnCarResponse)
+	err := c.cc.Invoke(ctx, "/proto.CarService/ReturnCar", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *carServiceClient) DeleteCar(ctx context.Context, in *DeleteCarRequest, opts ...grpc.CallOption) (*DeleteCarResponse, error) {
+	out := new(DeleteCarResponse)
+	err := c.cc.Invoke(ctx, "/proto.CarService/DeleteCar", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CarServiceServer is the server API for CarService service.
+// All implementations must embed UnimplementedCarServiceServer
+// for forward compatibility
+type CarServiceServer interface {
+	CreateCar(context.Context, *CreateCarRequest) (*CreateCarResponse, error)
+	RentCar(context.Context, *RentCarRequest) (*RentCarResponse, error)
+	UpdateOwnedCarID(context.Context, *UpdateOwnedCarIDRequest) (*UpdateOwnedCarIDResponse, error)
+	GetCarInfo(context.Context, *GetCarInfoRequest) (*GetCarInfoResponse, error)
+	GetAvailableCars(context.Context, *GetAvailableCarsRequest) (*GetAvailableCarsResponse, error)
+	ReturnCar(context.Context, *ReturnCarRequest) (*ReturnCarResponse, error)
+	DeleteCar(context.Context, *DeleteCarRequest) (*DeleteCarResponse, error)
+	mustEmbedUnimplementedCarServiceServer()
+}
+
+// UnimplementedCarServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCarServiceServer struct {
+}
+
+func (UnimplementedCarServiceServer) CreateCar(context.Context, *CreateCarRequest) (*CreateCarResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCar not implemented")
+}
+func (UnimplementedCarServiceServer) RentCar(context.Context, *RentCarRequest) (*RentCarResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RentCar not implemented")
+}
+func (UnimplementedCarServiceServer) UpdateOwnedCarID(context.Context, *UpdateOwnedCarIDRequest) (*UpdateOwnedCarIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOwnedCarID not implemented")
+}
+func (UnimplementedCarServiceServer) GetCarInfo(context.Context, *GetCarInfoRequest) (*GetCarInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCarInfo not implemented")
+}
+func (UnimplementedCarServiceServer) GetAvailableCars(context.Context, *GetAvailableCarsRequest) (*GetAvailableCarsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvailableCars not implemented")
+}
+func (UnimplementedCarServiceServer) ReturnCar(context.Context, *ReturnCarRequest) (*ReturnCarResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReturnCar not implemented")
+}
+func (UnimplementedCarServiceServer) DeleteCar(context.Context, *DeleteCarRequest) (*DeleteCarResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCar not implemented")
+}
+func (UnimplementedCarServiceServer) mustEmbedUnimplementedCarServiceServer() {}
+
+// UnsafeCarServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CarServiceServer will
+// result in compilation errors.
+type UnsafeCarServiceServer interface {
+	mustEmbedUnimplementedCarServiceServer()
+}
+
+func RegisterCarServiceServer(s grpc.ServiceRegistrar, srv CarServiceServer) {
+	s.RegisterService(&CarService_ServiceDesc, srv)
+}
+
+func _CarService_CreateCar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCarRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CarServiceServer).CreateCar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CarService/CreateCar",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CarServiceServer).CreateCar(ctx, req.(*CreateCarRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CarService_RentCar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RentCarRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CarServiceServer).RentCar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CarService/RentCar",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CarServiceServer).RentCar(ctx, req.(*RentCarRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CarService_UpdateOwnedCarID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOwnedCarIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CarServiceServer).UpdateOwnedCarID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CarService/UpdateOwnedCarID",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CarServiceServer).UpdateOwnedCarID(ctx, req.(*UpdateOwnedCarIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CarService_GetCarInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCarInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CarServiceServer).GetCarInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CarService/GetCarInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CarServiceServer).GetCarInfo(ctx, req.(*GetCarInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CarService_GetAvailableCars_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAvailableCarsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CarServiceServer).GetAvailableCars(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CarService/GetAvailableCars",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CarServiceServer).GetAvailableCars(ctx, req.(*GetAvailableCarsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CarService_ReturnCar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReturnCarRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CarServiceServer).ReturnCar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CarService/ReturnCar",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CarServiceServer).ReturnCar(ctx, req.(*ReturnCarRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CarService_DeleteCar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCarRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CarServiceServer).DeleteCar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.CarService/DeleteCar",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CarServiceServer).DeleteCar(ctx, req.(*DeleteCarRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CarService_ServiceDesc is the grpc.ServiceDesc for CarService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CarService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "proto.CarService",
+	HandlerType: (*CarServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateCar",
+			Handler:    _CarService_CreateCar_Handler,
+		},
+		{
+			MethodName: "RentCar",
+			Handler:    _CarService_RentCar_Handler,
+		},
+		{
+			MethodName: "UpdateOwnedCarID",
+			Handler:    _CarService_UpdateOwnedCarID_Handler,
+		},
+		{
+			MethodName: "GetCarInfo",
+			Handler:    _CarService_GetCarInfo_Handler,
+		},
+		{
+			MethodName: "GetAvailableCars",
+			Handler:    _CarService_GetAvailableCars_Handler,
+		},
+		{
+			MethodName: "ReturnCar",
+			Handler:    _CarService_ReturnCar_Handler,
+		},
+		{
+			MethodName: "DeleteCar",
+			Handler:    _CarService_DeleteCar_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
