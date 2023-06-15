@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"io"
-	"main-service/internal/validator"
+	"main_service/internal/validator"
 	"net/http"
 	"net/url"
 	"strconv"

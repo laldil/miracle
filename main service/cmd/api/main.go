@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"main-service/internal/jsonlog"
+	"main_service/internal/jsonlog"
 	"os"
 	"sync"
 )
