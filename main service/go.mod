@@ -1,4 +1,4 @@
-module main-service
+module main_service
 
 go 1.19
 

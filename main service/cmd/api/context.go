@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"main-service/internal/models"
+	"main_service/internal/models"
 	"net/http"
 )
 
