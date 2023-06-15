@@ -7,5 +7,6 @@ RUN go mod download && go mod verify
 
 COPY . .
 RUN go build -v -o ./cmd/api ./...
+EXPOSE 4001
 
 CMD ["go","run","./cmd/api"]
