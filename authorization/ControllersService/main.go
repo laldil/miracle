@@ -46,7 +46,6 @@ func main() {
 				continue
 			}
 		}
-
 		err = runUserCommands(client, carclient, userID)
 		if err != nil {
 			log.Printf("Error occurred during user commands: %v", err)
