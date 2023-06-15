@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v4.23.1
-// source: proto/user.proto
+// source: proto/func.proto
 
 package proto
 
@@ -38,7 +38,7 @@ type User struct {
 func (x *User) Reset() {
 	*x = User{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[0]
+		mi := &file_proto_func_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -51,7 +51,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[0]
+	mi := &file_proto_func_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64,7 +64,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{0}
+	return file_proto_func_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *User) GetId() int32 {
@@ -128,7 +128,7 @@ type UpdateOwnedCarIDRequest struct {
 func (x *UpdateOwnedCarIDRequest) Reset() {
 	*x = UpdateOwnedCarIDRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[1]
+		mi := &file_proto_func_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -141,7 +141,7 @@ func (x *UpdateOwnedCarIDRequest) String() string {
 func (*UpdateOwnedCarIDRequest) ProtoMessage() {}
 
 func (x *UpdateOwnedCarIDRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[1]
+	mi := &file_proto_func_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -154,7 +154,7 @@ func (x *UpdateOwnedCarIDRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOwnedCarIDRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOwnedCarIDRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{1}
+	return file_proto_func_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *UpdateOwnedCarIDRequest) GetUserId() int32 {
@@ -183,7 +183,7 @@ type UpdateOwnedCarIDResponse struct {
 func (x *UpdateOwnedCarIDResponse) Reset() {
 	*x = UpdateOwnedCarIDResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[2]
+		mi := &file_proto_func_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -196,7 +196,7 @@ func (x *UpdateOwnedCarIDResponse) String() string {
 func (*UpdateOwnedCarIDResponse) ProtoMessage() {}
 
 func (x *UpdateOwnedCarIDResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[2]
+	mi := &file_proto_func_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -209,7 +209,7 @@ func (x *UpdateOwnedCarIDResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOwnedCarIDResponse.ProtoReflect.Descriptor instead.
 func (*UpdateOwnedCarIDResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{2}
+	return file_proto_func_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UpdateOwnedCarIDResponse) GetUserId() int32 {
@@ -241,7 +241,7 @@ type ChatMessage struct {
 func (x *ChatMessage) Reset() {
 	*x = ChatMessage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[3]
+		mi := &file_proto_func_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -254,7 +254,7 @@ func (x *ChatMessage) String() string {
 func (*ChatMessage) ProtoMessage() {}
 
 func (x *ChatMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[3]
+	mi := &file_proto_func_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -267,7 +267,7 @@ func (x *ChatMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChatMessage.ProtoReflect.Descriptor instead.
 func (*ChatMessage) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{3}
+	return file_proto_func_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ChatMessage) GetMessageId() int32 {
@@ -319,7 +319,7 @@ type SendMessageRequest struct {
 func (x *SendMessageRequest) Reset() {
 	*x = SendMessageRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[4]
+		mi := &file_proto_func_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -332,7 +332,7 @@ func (x *SendMessageRequest) String() string {
 func (*SendMessageRequest) ProtoMessage() {}
 
 func (x *SendMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[4]
+	mi := &file_proto_func_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -345,7 +345,7 @@ func (x *SendMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendMessageRequest.ProtoReflect.Descriptor instead.
 func (*SendMessageRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{4}
+	return file_proto_func_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SendMessageRequest) GetSenderId() int32 {
@@ -387,7 +387,7 @@ type SendMessageResponse struct {
 func (x *SendMessageResponse) Reset() {
 	*x = SendMessageResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[5]
+		mi := &file_proto_func_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -400,7 +400,7 @@ func (x *SendMessageResponse) String() string {
 func (*SendMessageResponse) ProtoMessage() {}
 
 func (x *SendMessageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[5]
+	mi := &file_proto_func_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -413,7 +413,7 @@ func (x *SendMessageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendMessageResponse.ProtoReflect.Descriptor instead.
 func (*SendMessageResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{5}
+	return file_proto_func_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SendMessageResponse) GetMessageId() int32 {
@@ -439,7 +439,7 @@ type UserDTO struct {
 func (x *UserDTO) Reset() {
 	*x = UserDTO{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[6]
+		mi := &file_proto_func_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -452,7 +452,7 @@ func (x *UserDTO) String() string {
 func (*UserDTO) ProtoMessage() {}
 
 func (x *UserDTO) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[6]
+	mi := &file_proto_func_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -465,7 +465,7 @@ func (x *UserDTO) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserDTO.ProtoReflect.Descriptor instead.
 func (*UserDTO) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{6}
+	return file_proto_func_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UserDTO) GetUserId() int32 {
@@ -521,7 +521,7 @@ type UserProfileRequest struct {
 func (x *UserProfileRequest) Reset() {
 	*x = UserProfileRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[7]
+		mi := &file_proto_func_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -534,7 +534,7 @@ func (x *UserProfileRequest) String() string {
 func (*UserProfileRequest) ProtoMessage() {}
 
 func (x *UserProfileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[7]
+	mi := &file_proto_func_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -547,7 +547,7 @@ func (x *UserProfileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserProfileRequest.ProtoReflect.Descriptor instead.
 func (*UserProfileRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{7}
+	return file_proto_func_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UserProfileRequest) GetUserId() int32 {
@@ -573,7 +573,7 @@ type UserProfileResponse struct {
 func (x *UserProfileResponse) Reset() {
 	*x = UserProfileResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[8]
+		mi := &file_proto_func_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -586,7 +586,7 @@ func (x *UserProfileResponse) String() string {
 func (*UserProfileResponse) ProtoMessage() {}
 
 func (x *UserProfileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[8]
+	mi := &file_proto_func_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -599,7 +599,7 @@ func (x *UserProfileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserProfileResponse.ProtoReflect.Descriptor instead.
 func (*UserProfileResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{8}
+	return file_proto_func_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UserProfileResponse) GetUserId() int32 {
@@ -659,7 +659,7 @@ type RegisterRequest struct {
 func (x *RegisterRequest) Reset() {
 	*x = RegisterRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[9]
+		mi := &file_proto_func_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -672,7 +672,7 @@ func (x *RegisterRequest) String() string {
 func (*RegisterRequest) ProtoMessage() {}
 
 func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[9]
+	mi := &file_proto_func_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -685,7 +685,7 @@ func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{9}
+	return file_proto_func_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *RegisterRequest) GetId() int32 {
@@ -734,7 +734,7 @@ type RegisterResponse struct {
 func (x *RegisterResponse) Reset() {
 	*x = RegisterResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[10]
+		mi := &file_proto_func_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -747,7 +747,7 @@ func (x *RegisterResponse) String() string {
 func (*RegisterResponse) ProtoMessage() {}
 
 func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[10]
+	mi := &file_proto_func_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -760,7 +760,7 @@ func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterResponse.ProtoReflect.Descriptor instead.
 func (*RegisterResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{10}
+	return file_proto_func_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RegisterResponse) GetUserId() int32 {
@@ -783,7 +783,7 @@ type LoginRequest struct {
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[11]
+		mi := &file_proto_func_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -796,7 +796,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[11]
+	mi := &file_proto_func_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -809,7 +809,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{11}
+	return file_proto_func_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *LoginRequest) GetId() int32 {
@@ -844,7 +844,7 @@ type LoginResponse struct {
 func (x *LoginResponse) Reset() {
 	*x = LoginResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[12]
+		mi := &file_proto_func_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -857,7 +857,7 @@ func (x *LoginResponse) String() string {
 func (*LoginResponse) ProtoMessage() {}
 
 func (x *LoginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[12]
+	mi := &file_proto_func_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -870,7 +870,7 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
 func (*LoginResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{12}
+	return file_proto_func_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *LoginResponse) GetUserId() int32 {
@@ -891,7 +891,7 @@ type EmailValidationRequest struct {
 func (x *EmailValidationRequest) Reset() {
 	*x = EmailValidationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[13]
+		mi := &file_proto_func_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -904,7 +904,7 @@ func (x *EmailValidationRequest) String() string {
 func (*EmailValidationRequest) ProtoMessage() {}
 
 func (x *EmailValidationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[13]
+	mi := &file_proto_func_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -917,7 +917,7 @@ func (x *EmailValidationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmailValidationRequest.ProtoReflect.Descriptor instead.
 func (*EmailValidationRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{13}
+	return file_proto_func_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *EmailValidationRequest) GetEmail() string {
@@ -938,7 +938,7 @@ type EmailValidationResponse struct {
 func (x *EmailValidationResponse) Reset() {
 	*x = EmailValidationResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[14]
+		mi := &file_proto_func_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -951,7 +951,7 @@ func (x *EmailValidationResponse) String() string {
 func (*EmailValidationResponse) ProtoMessage() {}
 
 func (x *EmailValidationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[14]
+	mi := &file_proto_func_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -964,7 +964,7 @@ func (x *EmailValidationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmailValidationResponse.ProtoReflect.Descriptor instead.
 func (*EmailValidationResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{14}
+	return file_proto_func_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *EmailValidationResponse) GetValid() bool {
@@ -993,7 +993,7 @@ type Car struct {
 func (x *Car) Reset() {
 	*x = Car{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[15]
+		mi := &file_proto_func_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1006,7 +1006,7 @@ func (x *Car) String() string {
 func (*Car) ProtoMessage() {}
 
 func (x *Car) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[15]
+	mi := &file_proto_func_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1019,7 +1019,7 @@ func (x *Car) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Car.ProtoReflect.Descriptor instead.
 func (*Car) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{15}
+	return file_proto_func_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *Car) GetId() int32 {
@@ -1102,7 +1102,7 @@ type CreateCarRequest struct {
 func (x *CreateCarRequest) Reset() {
 	*x = CreateCarRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[16]
+		mi := &file_proto_func_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1115,7 +1115,7 @@ func (x *CreateCarRequest) String() string {
 func (*CreateCarRequest) ProtoMessage() {}
 
 func (x *CreateCarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[16]
+	mi := &file_proto_func_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1128,7 +1128,7 @@ func (x *CreateCarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCarRequest.ProtoReflect.Descriptor instead.
 func (*CreateCarRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{16}
+	return file_proto_func_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CreateCarRequest) GetOwnerId() int32 {
@@ -1191,7 +1191,7 @@ type CreateCarResponse struct {
 func (x *CreateCarResponse) Reset() {
 	*x = CreateCarResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[17]
+		mi := &file_proto_func_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1204,7 +1204,7 @@ func (x *CreateCarResponse) String() string {
 func (*CreateCarResponse) ProtoMessage() {}
 
 func (x *CreateCarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[17]
+	mi := &file_proto_func_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1217,7 +1217,7 @@ func (x *CreateCarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCarResponse.ProtoReflect.Descriptor instead.
 func (*CreateCarResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{17}
+	return file_proto_func_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CreateCarResponse) GetCarId() int32 {
@@ -1242,7 +1242,7 @@ type RentCarRequest struct {
 func (x *RentCarRequest) Reset() {
 	*x = RentCarRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[18]
+		mi := &file_proto_func_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1255,7 +1255,7 @@ func (x *RentCarRequest) String() string {
 func (*RentCarRequest) ProtoMessage() {}
 
 func (x *RentCarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[18]
+	mi := &file_proto_func_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1268,7 +1268,7 @@ func (x *RentCarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RentCarRequest.ProtoReflect.Descriptor instead.
 func (*RentCarRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{18}
+	return file_proto_func_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RentCarRequest) GetUserId() int32 {
@@ -1318,7 +1318,7 @@ type RentCarResponse struct {
 func (x *RentCarResponse) Reset() {
 	*x = RentCarResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[19]
+		mi := &file_proto_func_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1331,7 +1331,7 @@ func (x *RentCarResponse) String() string {
 func (*RentCarResponse) ProtoMessage() {}
 
 func (x *RentCarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[19]
+	mi := &file_proto_func_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1344,7 +1344,7 @@ func (x *RentCarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RentCarResponse.ProtoReflect.Descriptor instead.
 func (*RentCarResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{19}
+	return file_proto_func_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *RentCarResponse) GetCarId() int32 {
@@ -1373,7 +1373,7 @@ type GetCarInfoRequest struct {
 func (x *GetCarInfoRequest) Reset() {
 	*x = GetCarInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[20]
+		mi := &file_proto_func_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1386,7 +1386,7 @@ func (x *GetCarInfoRequest) String() string {
 func (*GetCarInfoRequest) ProtoMessage() {}
 
 func (x *GetCarInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[20]
+	mi := &file_proto_func_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1399,7 +1399,7 @@ func (x *GetCarInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCarInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetCarInfoRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{20}
+	return file_proto_func_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetCarInfoRequest) GetCarId() int32 {
@@ -1434,7 +1434,7 @@ type GetCarInfoResponse struct {
 func (x *GetCarInfoResponse) Reset() {
 	*x = GetCarInfoResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[21]
+		mi := &file_proto_func_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1447,7 +1447,7 @@ func (x *GetCarInfoResponse) String() string {
 func (*GetCarInfoResponse) ProtoMessage() {}
 
 func (x *GetCarInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[21]
+	mi := &file_proto_func_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1460,7 +1460,7 @@ func (x *GetCarInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCarInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetCarInfoResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{21}
+	return file_proto_func_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetCarInfoResponse) GetCarId() int32 {
@@ -1528,7 +1528,7 @@ type GetAvailableCarsRequest struct {
 func (x *GetAvailableCarsRequest) Reset() {
 	*x = GetAvailableCarsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[22]
+		mi := &file_proto_func_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1541,7 +1541,7 @@ func (x *GetAvailableCarsRequest) String() string {
 func (*GetAvailableCarsRequest) ProtoMessage() {}
 
 func (x *GetAvailableCarsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[22]
+	mi := &file_proto_func_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1554,7 +1554,7 @@ func (x *GetAvailableCarsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAvailableCarsRequest.ProtoReflect.Descriptor instead.
 func (*GetAvailableCarsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{22}
+	return file_proto_func_proto_rawDescGZIP(), []int{22}
 }
 
 type GetAvailableCarsResponse struct {
@@ -1568,7 +1568,7 @@ type GetAvailableCarsResponse struct {
 func (x *GetAvailableCarsResponse) Reset() {
 	*x = GetAvailableCarsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[23]
+		mi := &file_proto_func_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1581,7 +1581,7 @@ func (x *GetAvailableCarsResponse) String() string {
 func (*GetAvailableCarsResponse) ProtoMessage() {}
 
 func (x *GetAvailableCarsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[23]
+	mi := &file_proto_func_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1594,7 +1594,7 @@ func (x *GetAvailableCarsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAvailableCarsResponse.ProtoReflect.Descriptor instead.
 func (*GetAvailableCarsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{23}
+	return file_proto_func_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetAvailableCarsResponse) GetAvailableCars() []*CarInfo {
@@ -1622,7 +1622,7 @@ type CarInfo struct {
 func (x *CarInfo) Reset() {
 	*x = CarInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[24]
+		mi := &file_proto_func_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1635,7 +1635,7 @@ func (x *CarInfo) String() string {
 func (*CarInfo) ProtoMessage() {}
 
 func (x *CarInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[24]
+	mi := &file_proto_func_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1648,7 +1648,7 @@ func (x *CarInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CarInfo.ProtoReflect.Descriptor instead.
 func (*CarInfo) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{24}
+	return file_proto_func_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *CarInfo) GetCarId() int32 {
@@ -1720,7 +1720,7 @@ type ReturnCarRequest struct {
 func (x *ReturnCarRequest) Reset() {
 	*x = ReturnCarRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[25]
+		mi := &file_proto_func_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1733,7 +1733,7 @@ func (x *ReturnCarRequest) String() string {
 func (*ReturnCarRequest) ProtoMessage() {}
 
 func (x *ReturnCarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[25]
+	mi := &file_proto_func_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1746,7 +1746,7 @@ func (x *ReturnCarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReturnCarRequest.ProtoReflect.Descriptor instead.
 func (*ReturnCarRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{25}
+	return file_proto_func_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ReturnCarRequest) GetUserId() int32 {
@@ -1782,7 +1782,7 @@ type ReturnCarResponse struct {
 func (x *ReturnCarResponse) Reset() {
 	*x = ReturnCarResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[26]
+		mi := &file_proto_func_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1795,7 +1795,7 @@ func (x *ReturnCarResponse) String() string {
 func (*ReturnCarResponse) ProtoMessage() {}
 
 func (x *ReturnCarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[26]
+	mi := &file_proto_func_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1808,7 +1808,7 @@ func (x *ReturnCarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReturnCarResponse.ProtoReflect.Descriptor instead.
 func (*ReturnCarResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{26}
+	return file_proto_func_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ReturnCarResponse) GetCarId() int32 {
@@ -1836,7 +1836,7 @@ type DeleteCarRequest struct {
 func (x *DeleteCarRequest) Reset() {
 	*x = DeleteCarRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[27]
+		mi := &file_proto_func_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1849,7 +1849,7 @@ func (x *DeleteCarRequest) String() string {
 func (*DeleteCarRequest) ProtoMessage() {}
 
 func (x *DeleteCarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[27]
+	mi := &file_proto_func_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1862,7 +1862,7 @@ func (x *DeleteCarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCarRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCarRequest) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{27}
+	return file_proto_func_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *DeleteCarRequest) GetCarId() int32 {
@@ -1884,7 +1884,7 @@ type DeleteCarResponse struct {
 func (x *DeleteCarResponse) Reset() {
 	*x = DeleteCarResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_user_proto_msgTypes[28]
+		mi := &file_proto_func_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1897,7 +1897,7 @@ func (x *DeleteCarResponse) String() string {
 func (*DeleteCarResponse) ProtoMessage() {}
 
 func (x *DeleteCarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_user_proto_msgTypes[28]
+	mi := &file_proto_func_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1910,7 +1910,7 @@ func (x *DeleteCarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCarResponse.ProtoReflect.Descriptor instead.
 func (*DeleteCarResponse) Descriptor() ([]byte, []int) {
-	return file_proto_user_proto_rawDescGZIP(), []int{28}
+	return file_proto_func_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *DeleteCarResponse) GetSuccess() bool {
@@ -1927,10 +1927,10 @@ func (x *DeleteCarResponse) GetCarId() int32 {
 	return 0
 }
 
-var File_proto_user_proto protoreflect.FileDescriptor
+var File_proto_func_proto protoreflect.FileDescriptor
 
-var file_proto_user_proto_rawDesc = []byte{
-	0x0a, 0x10, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f,
+var file_proto_func_proto_rawDesc = []byte{
+	0x0a, 0x10, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x66, 0x75, 0x6e, 0x63, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x12, 0x05, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
 	0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73,
 	0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xd3, 0x01, 0x0a, 0x04, 0x55,
@@ -2199,19 +2199,19 @@ var file_proto_user_proto_rawDesc = []byte{
 }
 
 var (
-	file_proto_user_proto_rawDescOnce sync.Once
-	file_proto_user_proto_rawDescData = file_proto_user_proto_rawDesc
+	file_proto_func_proto_rawDescOnce sync.Once
+	file_proto_func_proto_rawDescData = file_proto_func_proto_rawDesc
 )
 
-func file_proto_user_proto_rawDescGZIP() []byte {
-	file_proto_user_proto_rawDescOnce.Do(func() {
-		file_proto_user_proto_rawDescData = protoimpl.X.CompressGZIP(file_proto_user_proto_rawDescData)
+func file_proto_func_proto_rawDescGZIP() []byte {
+	file_proto_func_proto_rawDescOnce.Do(func() {
+		file_proto_func_proto_rawDescData = protoimpl.X.CompressGZIP(file_proto_func_proto_rawDescData)
 	})
-	return file_proto_user_proto_rawDescData
+	return file_proto_func_proto_rawDescData
 }
 
-var file_proto_user_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
-var file_proto_user_proto_goTypes = []interface{}{
+var file_proto_func_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_proto_func_proto_goTypes = []interface{}{
 	(*User)(nil),                     // 0: proto.User
 	(*UpdateOwnedCarIDRequest)(nil),  // 1: proto.UpdateOwnedCarIDRequest
 	(*UpdateOwnedCarIDResponse)(nil), // 2: proto.UpdateOwnedCarIDResponse
@@ -2243,7 +2243,7 @@ var file_proto_user_proto_goTypes = []interface{}{
 	(*DeleteCarResponse)(nil),        // 28: proto.DeleteCarResponse
 	(*timestamppb.Timestamp)(nil),    // 29: google.protobuf.Timestamp
 }
-var file_proto_user_proto_depIdxs = []int32{
+var file_proto_func_proto_depIdxs = []int32{
 	15, // 0: proto.User.owned_car:type_name -> proto.Car
 	15, // 1: proto.User.rented_car:type_name -> proto.Car
 	29, // 2: proto.ChatMessage.timestamp:type_name -> google.protobuf.Timestamp
@@ -2288,13 +2288,13 @@ var file_proto_user_proto_depIdxs = []int32{
 	0,  // [0:13] is the sub-list for field type_name
 }
 
-func init() { file_proto_user_proto_init() }
-func file_proto_user_proto_init() {
-	if File_proto_user_proto != nil {
+func init() { file_proto_func_proto_init() }
+func file_proto_func_proto_init() {
+	if File_proto_func_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_proto_user_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*User); i {
 			case 0:
 				return &v.state
@@ -2306,7 +2306,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateOwnedCarIDRequest); i {
 			case 0:
 				return &v.state
@@ -2318,7 +2318,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateOwnedCarIDResponse); i {
 			case 0:
 				return &v.state
@@ -2330,7 +2330,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ChatMessage); i {
 			case 0:
 				return &v.state
@@ -2342,7 +2342,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SendMessageRequest); i {
 			case 0:
 				return &v.state
@@ -2354,7 +2354,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SendMessageResponse); i {
 			case 0:
 				return &v.state
@@ -2366,7 +2366,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UserDTO); i {
 			case 0:
 				return &v.state
@@ -2378,7 +2378,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UserProfileRequest); i {
 			case 0:
 				return &v.state
@@ -2390,7 +2390,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UserProfileResponse); i {
 			case 0:
 				return &v.state
@@ -2402,7 +2402,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RegisterRequest); i {
 			case 0:
 				return &v.state
@@ -2414,7 +2414,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RegisterResponse); i {
 			case 0:
 				return &v.state
@@ -2426,7 +2426,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*LoginRequest); i {
 			case 0:
 				return &v.state
@@ -2438,7 +2438,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*LoginResponse); i {
 			case 0:
 				return &v.state
@@ -2450,7 +2450,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EmailValidationRequest); i {
 			case 0:
 				return &v.state
@@ -2462,7 +2462,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EmailValidationResponse); i {
 			case 0:
 				return &v.state
@@ -2474,7 +2474,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Car); i {
 			case 0:
 				return &v.state
@@ -2486,7 +2486,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateCarRequest); i {
 			case 0:
 				return &v.state
@@ -2498,7 +2498,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateCarResponse); i {
 			case 0:
 				return &v.state
@@ -2510,7 +2510,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RentCarRequest); i {
 			case 0:
 				return &v.state
@@ -2522,7 +2522,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RentCarResponse); i {
 			case 0:
 				return &v.state
@@ -2534,7 +2534,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetCarInfoRequest); i {
 			case 0:
 				return &v.state
@@ -2546,7 +2546,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetCarInfoResponse); i {
 			case 0:
 				return &v.state
@@ -2558,7 +2558,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetAvailableCarsRequest); i {
 			case 0:
 				return &v.state
@@ -2570,7 +2570,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetAvailableCarsResponse); i {
 			case 0:
 				return &v.state
@@ -2582,7 +2582,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CarInfo); i {
 			case 0:
 				return &v.state
@@ -2594,7 +2594,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReturnCarRequest); i {
 			case 0:
 				return &v.state
@@ -2606,7 +2606,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReturnCarResponse); i {
 			case 0:
 				return &v.state
@@ -2618,7 +2618,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteCarRequest); i {
 			case 0:
 				return &v.state
@@ -2630,7 +2630,7 @@ func file_proto_user_proto_init() {
 				return nil
 			}
 		}
-		file_proto_user_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+		file_proto_func_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteCarResponse); i {
 			case 0:
 				return &v.state
@@ -2647,18 +2647,18 @@ func file_proto_user_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_proto_user_proto_rawDesc,
+			RawDescriptor: file_proto_func_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   2,
 		},
-		GoTypes:           file_proto_user_proto_goTypes,
-		DependencyIndexes: file_proto_user_proto_depIdxs,
-		MessageInfos:      file_proto_user_proto_msgTypes,
+		GoTypes:           file_proto_func_proto_goTypes,
+		DependencyIndexes: file_proto_func_proto_depIdxs,
+		MessageInfos:      file_proto_func_proto_msgTypes,
 	}.Build()
-	File_proto_user_proto = out.File
-	file_proto_user_proto_rawDesc = nil
-	file_proto_user_proto_goTypes = nil
-	file_proto_user_proto_depIdxs = nil
+	File_proto_func_proto = out.File
+	file_proto_func_proto_rawDesc = nil
+	file_proto_func_proto_goTypes = nil
+	file_proto_func_proto_depIdxs = nil
 }

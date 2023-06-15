@@ -6,8 +6,6 @@ option go_package = "/proto";
 
 import "google/protobuf/timestamp.proto";
 
-
-
 service UserService {
   rpc RegisterUser(RegisterRequest) returns (RegisterResponse) {}
   rpc LoginUser(LoginRequest) returns (LoginResponse) {}
